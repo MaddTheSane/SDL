@@ -55,7 +55,7 @@ typedef SDL_ENUM(Uint8, SDL_EventStateGeneric)
 /**
  * \brief The types of events that can be delivered.
  */
-typedef SDL_ENUM(Uint32, SDL_EventType)
+typedef SDL_ENUM(Uint16, SDL_EventType)
 {
     SDL_FIRSTEVENT     = 0,     /**< Unused (do not remove) */
 
@@ -361,7 +361,7 @@ typedef struct SDL_ControllerAxisEvent
     SDL_EventType type; /**< ::SDL_CONTROLLERAXISMOTION */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     SDL_JoystickID which; /**< The joystick instance id */
-    Uint8 axis;         /**< The controller axis (SDL_GameControllerAxis) */
+    SDL_GameControllerAxis axis; /**< The controller axis (SDL_GameControllerAxis) */
     Uint8 padding1;
     Uint8 padding2;
     Uint8 padding3;
@@ -378,7 +378,7 @@ typedef struct SDL_ControllerButtonEvent
     SDL_EventType type; /**< ::SDL_CONTROLLERBUTTONDOWN or ::SDL_CONTROLLERBUTTONUP */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     SDL_JoystickID which; /**< The joystick instance id */
-    Uint8 button;       /**< The controller button (SDL_GameControllerButton) */
+    SDL_GameControllerButton button; /**< The controller button (SDL_GameControllerButton) */
     SDL_EventStateGeneric state; /**< ::SDL_PRESSED or ::SDL_RELEASED */
     Uint8 padding1;
     Uint8 padding2;
@@ -576,7 +576,7 @@ typedef union SDL_Event
 extern DECLSPEC void SDLCALL SDL_PumpEvents(void);
 
 /* @{ */
-typedef SDL_ENUM(int, SDL_eventaction)
+typedef SDL_ENUM(char, SDL_eventaction)
 {
     SDL_ADDEVENT,
     SDL_PEEKEVENT,

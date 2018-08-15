@@ -51,6 +51,7 @@
 #include "SDL_stdinc.h"
 #include "SDL_rect.h"
 #include "SDL_video.h"
+#include "SDL_pixels.h"
 
 #include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
@@ -98,7 +99,7 @@ typedef SDL_ENUM(int, SDL_TextureAccess)
 /**
  *  \brief The texture channel modulation used in SDL_RenderCopy().
  */
-typedef SDL_OPTIONS(int, SDL_TextureModulate)
+typedef SDL_OPTIONS(Uint32, SDL_TextureModulate)
 {
     SDL_TEXTUREMODULATE_NONE = 0x00000000,     /**< No modulation */
     SDL_TEXTUREMODULATE_COLOR = 0x00000001,    /**< srcC = srcC * color */
@@ -108,7 +109,7 @@ typedef SDL_OPTIONS(int, SDL_TextureModulate)
 /**
  *  \brief Flip constants for SDL_RenderCopyEx
  */
-typedef SDL_OPTIONS(int, SDL_RendererFlip)
+typedef SDL_OPTIONS(Uint8, SDL_RendererFlip)
 {
     SDL_FLIP_NONE = 0x00000000,     /**< Do not flip */
     SDL_FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
@@ -240,7 +241,7 @@ extern DECLSPEC int SDLCALL SDL_GetRendererOutputSize(SDL_Renderer * renderer,
  *  \sa SDL_DestroyTexture()
  */
 extern DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer * renderer,
-                                                        Uint32 format,
+                                                        SDL_PixelFormatFormat format,
                                                         SDL_TextureAccess access, int w,
                                                         int h);
 

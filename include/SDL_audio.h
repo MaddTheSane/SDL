@@ -138,7 +138,7 @@ typedef SDL_OPTIONS(Uint16, SDL_AudioFormat) {
  *  Which audio format changes are allowed when opening a device.
  */
 /* @{ */
-typedef SDL_OPTIONS(int, SDL_AudioAllowedChanges) {
+typedef SDL_OPTIONS(Uint32, SDL_AudioAllowedChanges) {
     SDL_AUDIO_ALLOW_FREQUENCY_CHANGE    = 0x00000001,
     SDL_AUDIO_ALLOW_FORMAT_CHANGE       = 0x00000002,
     SDL_AUDIO_ALLOW_CHANNELS_CHANGE     = 0x00000004,

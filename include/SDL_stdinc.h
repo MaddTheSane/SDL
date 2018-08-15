@@ -187,11 +187,9 @@ char *alloca();
 /* ARM's compiler throws warnings if we use an enum: like "SDL_bool x = a < b;" */
 #define SDL_FALSE 0
 #define SDL_TRUE 1
-typedef int SDL_bool;
+typedef char SDL_bool;
 #else
-// int to maintain compatibility with existing code.
-// could be changed to a char or unsigned char instead.
-typedef SDL_ENUM(int, SDL_bool)
+typedef SDL_ENUM(char, SDL_bool)
 {
     SDL_FALSE = 0,
     SDL_TRUE = 1

@@ -50,10 +50,10 @@ extern "C" {
  */
 /* @{ */
 typedef SDL_OPTIONS(Uint32, SDL_SurfaceFlag) {
-    SDL_SWSURFACE       = 0u,           /**< Just here for compatibility */
-    SDL_PREALLOC        = 0x00000001u,  /**< Surface uses preallocated memory */
-    SDL_RLEACCEL        = 0x00000002u,  /**< Surface is RLE encoded */
-    SDL_DONTFREE        = 0x00000004u   /**< Surface is referenced internally */
+    SDL_SWSURFACE       = 0,           /**< Just here for compatibility */
+    SDL_PREALLOC        = 0x00000001,  /**< Surface uses preallocated memory */
+    SDL_RLEACCEL        = 0x00000002,  /**< Surface is RLE encoded */
+    SDL_DONTFREE        = 0x00000004   /**< Surface is referenced internally */
 };
 /* @} *//* Surface flags */
 
@@ -102,7 +102,7 @@ typedef int (SDLCALL *SDL_blit) (struct SDL_Surface * src, SDL_Rect * srcrect,
 /**
  * \brief The formula used for converting between YUV and RGB
  */
-typedef SDL_ENUM(int, SDL_YUV_CONVERSION_MODE)
+typedef SDL_ENUM(Sint8, SDL_YUV_CONVERSION_MODE)
 {
     SDL_YUV_CONVERSION_JPEG,        /**< Full range JPEG */
     SDL_YUV_CONVERSION_BT601,       /**< BT.601 (the default) */

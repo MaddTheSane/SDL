@@ -121,13 +121,13 @@ static const size_t CONSTANTS_OFFSET_DECODE_BT709 = ALIGN_CONSTANTS(CONSTANTS_OF
 static const size_t CONSTANTS_OFFSET_CLEAR_VERTS = ALIGN_CONSTANTS(CONSTANTS_OFFSET_DECODE_BT709 + sizeof(float) * 4 * 4);
 static const size_t CONSTANTS_LENGTH = CONSTANTS_OFFSET_CLEAR_VERTS + sizeof(float) * 6;
 
-typedef SDL_ENUM(int, SDL_MetalVertexFunction)
+typedef NS_ENUM(short, SDL_MetalVertexFunction)
 {
     SDL_METAL_VERTEX_SOLID,
     SDL_METAL_VERTEX_COPY,
 };
 
-typedef SDL_ENUM(int, SDL_MetalFragmentFunction)
+typedef NS_ENUM(short, SDL_MetalFragmentFunction)
 {
     SDL_METAL_FRAGMENT_SOLID = 0,
     SDL_METAL_FRAGMENT_COPY,

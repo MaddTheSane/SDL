@@ -43,7 +43,7 @@ typedef struct SDL_Cursor SDL_Cursor;   /**< Implementation dependent */
 /**
  * \brief Cursor types for SDL_CreateSystemCursor().
  */
-typedef SDL_ENUM(int, SDL_SystemCursor)
+typedef SDL_ENUM(Sint8, SDL_SystemCursor)
 {
     SDL_SYSTEM_CURSOR_ARROW,     /**< Arrow */
     SDL_SYSTEM_CURSOR_IBEAM,     /**< I-beam */

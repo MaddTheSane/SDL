@@ -43,8 +43,10 @@ extern "C" {
  *  These define alpha as the opacity of a surface.
  */
 /* @{ */
-#define SDL_ALPHA_OPAQUE 255
-#define SDL_ALPHA_TRANSPARENT 0
+SDL_ENUM(Uint8) {
+    SDL_ALPHA_OPAQUE = 255,
+    SDL_ALPHA_TRANSPARENT = 0
+};
 /* @} */
 
 /** Pixel type. */
@@ -168,7 +170,7 @@ enum
     ((format) && (SDL_PIXELFLAG(format) != 1))
 
 /* Note: If you modify this list, update SDL_GetPixelFormatName() */
-SDL_ENUM(Uint32)
+typedef SDL_ENUM(Uint32, SDL_PixelFormatFormat)
 {
     SDL_PIXELFORMAT_UNKNOWN,
     SDL_PIXELFORMAT_INDEX1LSB =
@@ -314,7 +316,7 @@ typedef struct SDL_Palette
  */
 typedef struct SDL_PixelFormat
 {
-    Uint32 format;
+    SDL_PixelFormatFormat format;
     SDL_Palette *palette;
     Uint8 BitsPerPixel;
     Uint8 BytesPerPixel;
@@ -338,7 +340,7 @@ typedef struct SDL_PixelFormat
 /**
  * \brief Get the human readable name of a pixel format
  */
-extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
+extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(SDL_PixelFormatFormat format);
 
 /**
  *  \brief Convert one of the enumerated pixel formats to a bpp and RGBA masks.
@@ -347,7 +349,7 @@ extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
  *
  *  \sa SDL_MasksToPixelFormatEnum()
  */
-extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(Uint32 format,
+extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(SDL_PixelFormatFormat format,
                                                             int *bpp,
                                                             Uint32 * Rmask,
                                                             Uint32 * Gmask,
@@ -371,7 +373,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
 /**
  *  \brief Create an SDL_PixelFormat structure from a pixel format enum.
  */
-extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(Uint32 pixel_format);
+extern DECLSPEC SDL_PixelFormat * SDLCALL SDL_AllocFormat(SDL_PixelFormatFormat pixel_format);
 
 /**
  *  \brief Free an SDL_PixelFormat structure.

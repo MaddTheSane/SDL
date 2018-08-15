@@ -285,8 +285,10 @@ extern DECLSPEC void SDLCALL SDL_JoystickUpdate(void);
  */
 extern DECLSPEC int SDLCALL SDL_JoystickEventState(int state);
 
-#define SDL_JOYSTICK_AXIS_MAX   32767
-#define SDL_JOYSTICK_AXIS_MIN   -32768
+SDL_ENUM(int) {
+    SDL_JOYSTICK_AXIS_MAX   = 32767,
+    SDL_JOYSTICK_AXIS_MIN   = -32768
+};
 /**
  *  Get the current state of an axis control on a joystick.
  *

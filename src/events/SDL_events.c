@@ -509,7 +509,7 @@ SDL_CutEvent(SDL_EventEntry *entry)
 /* Lock the event queue, take a peep at it, and unlock it */
 int
 SDL_PeepEvents(SDL_Event * events, int numevents, SDL_eventaction action,
-               Uint32 minType, Uint32 maxType)
+               SDL_EventType minType, SDL_EventType maxType)
 {
     int i, used;
 
@@ -586,25 +586,25 @@ SDL_PeepEvents(SDL_Event * events, int numevents, SDL_eventaction action,
 }
 
 SDL_bool
-SDL_HasEvent(Uint32 type)
+SDL_HasEvent(SDL_EventType type)
 {
     return (SDL_PeepEvents(NULL, 0, SDL_PEEKEVENT, type, type) > 0);
 }
 
 SDL_bool
-SDL_HasEvents(Uint32 minType, Uint32 maxType)
+SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType)
 {
     return (SDL_PeepEvents(NULL, 0, SDL_PEEKEVENT, minType, maxType) > 0);
 }
 
 void
-SDL_FlushEvent(Uint32 type)
+SDL_FlushEvent(SDL_EventType type)
 {
     SDL_FlushEvents(type, type);
 }
 
 void
-SDL_FlushEvents(Uint32 minType, Uint32 maxType)
+SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType)
 {
     /* !!! FIXME: we need to manually SDL_free() the strings in TEXTINPUT and
        drag'n'drop events if we're flushing them without passing them to the

@@ -58,7 +58,7 @@ struct _SDL_GameController;
 typedef struct _SDL_GameController SDL_GameController;
 
 
-typedef SDL_ENUM(int, SDL_GameControllerBindType)
+typedef SDL_ENUM(Sint8, SDL_GameControllerBindType)
 {
     SDL_CONTROLLER_BINDTYPE_NONE = 0,
     SDL_CONTROLLER_BINDTYPE_BUTTON,
@@ -262,10 +262,10 @@ extern DECLSPEC void SDLCALL SDL_GameControllerUpdate(void);
  *
  *  Trigger axis values range from 0 to SDL_JOYSTICK_AXIS_MAX.
  */
-typedef SDL_ENUM(int, SDL_GameControllerAxis)
+typedef SDL_ENUM(Uint8, SDL_GameControllerAxis)
 {
-    SDL_CONTROLLER_AXIS_INVALID = -1,
-    SDL_CONTROLLER_AXIS_LEFTX,
+    SDL_CONTROLLER_AXIS_INVALID = (Uint8)(-1),
+    SDL_CONTROLLER_AXIS_LEFTX = 0,
     SDL_CONTROLLER_AXIS_LEFTY,
     SDL_CONTROLLER_AXIS_RIGHTX,
     SDL_CONTROLLER_AXIS_RIGHTY,
@@ -306,10 +306,10 @@ SDL_GameControllerGetAxis(SDL_GameController *gamecontroller,
 /**
  *  The list of buttons available from a controller
  */
-typedef SDL_ENUM(int, SDL_GameControllerButton)
+typedef SDL_ENUM(Uint8, SDL_GameControllerButton)
 {
-    SDL_CONTROLLER_BUTTON_INVALID = -1,
-    SDL_CONTROLLER_BUTTON_A,
+    SDL_CONTROLLER_BUTTON_INVALID = (Uint8)(-1),
+    SDL_CONTROLLER_BUTTON_A = 0,
     SDL_CONTROLLER_BUTTON_B,
     SDL_CONTROLLER_BUTTON_X,
     SDL_CONTROLLER_BUTTON_Y,
