@@ -52,23 +52,36 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5531EECB2124C55F0017D71F /* SDL_test_compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_compare.h; sourceTree = "<group>"; };
+		5531EECC2124C55F0017D71F /* SDL_test_crc32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_crc32.h; sourceTree = "<group>"; };
+		5531EECD2124C5600017D71F /* SDL_test_memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_memory.h; sourceTree = "<group>"; };
+		5531EECE2124C5600017D71F /* SDL_test_random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_random.h; sourceTree = "<group>"; };
+		5531EECF2124C5600017D71F /* SDL_test_font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_font.h; sourceTree = "<group>"; };
+		5531EED02124C5600017D71F /* SDL_test_md5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_md5.h; sourceTree = "<group>"; };
+		5531EED12124C5600017D71F /* SDL_test_images.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_images.h; sourceTree = "<group>"; };
+		5531EED22124C5600017D71F /* SDL_test_fuzzer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_fuzzer.h; sourceTree = "<group>"; };
+		5531EED32124C5600017D71F /* SDL_test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test.h; sourceTree = "<group>"; };
+		5531EED42124C5600017D71F /* SDL_test_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_common.h; sourceTree = "<group>"; };
+		5531EED52124C5600017D71F /* SDL_test_harness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_harness.h; sourceTree = "<group>"; };
+		5531EED62124C5600017D71F /* SDL_test_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_log.h; sourceTree = "<group>"; };
+		5531EED72124C5600017D71F /* SDL_test_assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_test_assert.h; sourceTree = "<group>"; };
 		AA1EE4461760589B0029C7A5 /* libSDL2test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSDL2test.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA1EE454176059AB0029C7A5 /* SDL_test_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_common.c; path = ../../src/test/SDL_test_common.c; sourceTree = "<group>"; };
-		AA1EE455176059AB0029C7A5 /* SDL_test_compare.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_compare.c; path = ../../src/test/SDL_test_compare.c; sourceTree = "<group>"; };
-		AA1EE456176059AB0029C7A5 /* SDL_test_crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_crc32.c; path = ../../src/test/SDL_test_crc32.c; sourceTree = "<group>"; };
-		AA1EE457176059AB0029C7A5 /* SDL_test_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_font.c; path = ../../src/test/SDL_test_font.c; sourceTree = "<group>"; };
-		AA1EE458176059AB0029C7A5 /* SDL_test_fuzzer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_fuzzer.c; path = ../../src/test/SDL_test_fuzzer.c; sourceTree = "<group>"; };
-		AA1EE459176059AB0029C7A5 /* SDL_test_harness.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_harness.c; path = ../../src/test/SDL_test_harness.c; sourceTree = "<group>"; };
-		AA1EE45A176059AB0029C7A5 /* SDL_test_imageBlit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_imageBlit.c; path = ../../src/test/SDL_test_imageBlit.c; sourceTree = "<group>"; };
-		AA1EE45B176059AB0029C7A5 /* SDL_test_imageBlitBlend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_imageBlitBlend.c; path = ../../src/test/SDL_test_imageBlitBlend.c; sourceTree = "<group>"; };
-		AA1EE45C176059AB0029C7A5 /* SDL_test_imageFace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_imageFace.c; path = ../../src/test/SDL_test_imageFace.c; sourceTree = "<group>"; };
-		AA1EE45D176059AB0029C7A5 /* SDL_test_imagePrimitives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_imagePrimitives.c; path = ../../src/test/SDL_test_imagePrimitives.c; sourceTree = "<group>"; };
-		AA1EE45E176059AB0029C7A5 /* SDL_test_imagePrimitivesBlend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_imagePrimitivesBlend.c; path = ../../src/test/SDL_test_imagePrimitivesBlend.c; sourceTree = "<group>"; };
-		AA1EE45F176059AB0029C7A5 /* SDL_test_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_log.c; path = ../../src/test/SDL_test_log.c; sourceTree = "<group>"; };
-		AA1EE460176059AB0029C7A5 /* SDL_test_md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_md5.c; path = ../../src/test/SDL_test_md5.c; sourceTree = "<group>"; };
-		AA1EE461176059AB0029C7A5 /* SDL_test_random.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_random.c; path = ../../src/test/SDL_test_random.c; sourceTree = "<group>"; };
-		AAF02FFF1F9009B100B9A9FB /* SDL_test_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_memory.c; path = ../../src/test/SDL_test_memory.c; sourceTree = "<group>"; };
-		AAF030001F9009B100B9A9FB /* SDL_test_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL_test_assert.c; path = ../../src/test/SDL_test_assert.c; sourceTree = "<group>"; };
+		AA1EE454176059AB0029C7A5 /* SDL_test_common.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_common.c; sourceTree = "<group>"; };
+		AA1EE455176059AB0029C7A5 /* SDL_test_compare.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_compare.c; sourceTree = "<group>"; };
+		AA1EE456176059AB0029C7A5 /* SDL_test_crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_crc32.c; sourceTree = "<group>"; };
+		AA1EE457176059AB0029C7A5 /* SDL_test_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_font.c; sourceTree = "<group>"; };
+		AA1EE458176059AB0029C7A5 /* SDL_test_fuzzer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_fuzzer.c; sourceTree = "<group>"; };
+		AA1EE459176059AB0029C7A5 /* SDL_test_harness.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_harness.c; sourceTree = "<group>"; };
+		AA1EE45A176059AB0029C7A5 /* SDL_test_imageBlit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_imageBlit.c; sourceTree = "<group>"; };
+		AA1EE45B176059AB0029C7A5 /* SDL_test_imageBlitBlend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_imageBlitBlend.c; sourceTree = "<group>"; };
+		AA1EE45C176059AB0029C7A5 /* SDL_test_imageFace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_imageFace.c; sourceTree = "<group>"; };
+		AA1EE45D176059AB0029C7A5 /* SDL_test_imagePrimitives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_imagePrimitives.c; sourceTree = "<group>"; };
+		AA1EE45E176059AB0029C7A5 /* SDL_test_imagePrimitivesBlend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_imagePrimitivesBlend.c; sourceTree = "<group>"; };
+		AA1EE45F176059AB0029C7A5 /* SDL_test_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_log.c; sourceTree = "<group>"; };
+		AA1EE460176059AB0029C7A5 /* SDL_test_md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_md5.c; sourceTree = "<group>"; };
+		AA1EE461176059AB0029C7A5 /* SDL_test_random.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_random.c; sourceTree = "<group>"; };
+		AAF02FFF1F9009B100B9A9FB /* SDL_test_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_memory.c; sourceTree = "<group>"; };
+		AAF030001F9009B100B9A9FB /* SDL_test_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_test_assert.c; sourceTree = "<group>"; };
 		FA3D98F81BC4E5A2002C96C8 /* libSDL2test-TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSDL2test-TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,10 +103,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5531EECA2124C5430017D71F /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				5531EED72124C5600017D71F /* SDL_test_assert.h */,
+				5531EED42124C5600017D71F /* SDL_test_common.h */,
+				5531EECB2124C55F0017D71F /* SDL_test_compare.h */,
+				5531EECC2124C55F0017D71F /* SDL_test_crc32.h */,
+				5531EECF2124C5600017D71F /* SDL_test_font.h */,
+				5531EED22124C5600017D71F /* SDL_test_fuzzer.h */,
+				5531EED52124C5600017D71F /* SDL_test_harness.h */,
+				5531EED12124C5600017D71F /* SDL_test_images.h */,
+				5531EED62124C5600017D71F /* SDL_test_log.h */,
+				5531EED02124C5600017D71F /* SDL_test_md5.h */,
+				5531EECD2124C5600017D71F /* SDL_test_memory.h */,
+				5531EECE2124C5600017D71F /* SDL_test_random.h */,
+				5531EED32124C5600017D71F /* SDL_test.h */,
+			);
+			name = Headers;
+			path = ../../include;
+			sourceTree = "<group>";
+		};
 		AA1EE43D1760589B0029C7A5 = {
 			isa = PBXGroup;
 			children = (
 				AA1EE453176059770029C7A5 /* Library Source */,
+				5531EECA2124C5430017D71F /* Headers */,
 				AA1EE4471760589B0029C7A5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,6 +163,7 @@
 				AA1EE461176059AB0029C7A5 /* SDL_test_random.c */,
 			);
 			name = "Library Source";
+			path = ../../src/test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -16,12 +16,11 @@ NativeWindowFactory CocoaWindowFactory = {
 
 static void *CreateWindowCocoa(int w, int h)
 {
-    NSAutoreleasePool *pool;
     NSWindow *nswindow;
     NSRect rect;
     NSUInteger style;
 
-    pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 
     rect.origin.x = 0;
     rect.origin.y = 0;
@@ -34,18 +33,18 @@ static void *CreateWindowCocoa(int w, int h)
     nswindow = [[NSWindow alloc] initWithContentRect:rect styleMask:style backing:NSBackingStoreBuffered defer:FALSE];
     [nswindow makeKeyAndOrderFront:nil];
 
-    [pool release];
-
-    return nswindow;
+	}
+	
+    return CFBridgingRetain(nswindow);
 }
 
 static void DestroyWindowCocoa(void *window)
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSWindow *nswindow = (NSWindow *)window;
+	@autoreleasepool {
+    NSWindow *nswindow = CFBridgingRelease(window);
 
     [nswindow close];
-    [pool release];
+	}
 }
 
 #endif

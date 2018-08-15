@@ -65,9 +65,7 @@
 #ifdef HAVE_WCHAR_H
 # include <wchar.h>
 #endif
-#if defined(HAVE_INTTYPES_H)
-# include <inttypes.h>
-#elif defined(HAVE_STDINT_H)
+#if defined(HAVE_STDINT_H)
 # include <stdint.h>
 #endif
 #ifdef HAVE_CTYPE_H

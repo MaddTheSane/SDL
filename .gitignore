@@ -1,0 +1,8 @@
+*.orig
+.DS_Store
+xcuserdata/
+*.pbxuser
+*.mode?v?
+autom4te.cache/
+project.xcworkspace/
+build/

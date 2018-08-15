@@ -333,7 +333,7 @@ main(int argc, char *argv[])
         SDL_RenderClear(renderer);
     }
 
-    srand(time(NULL));
+    srand(time(NULL) & 0x7fffffff);
 
     /* Main render loop */
     frames = 0;

@@ -1,0 +1,103 @@
+framework module SDL2 {
+    textual header "begin_code.h"
+    textual header "close_code.h"
+    
+    umbrella header "SDL.h"
+    
+    export *
+    module * { export * }
+    
+    module SDL_assert {
+        textual header "SDL_assert.h"
+        export *
+    }
+    
+    explicit module SDL_bits {
+        header "SDL_bits.h"
+        export *
+    }
+    
+    explicit module SDL_copying {
+        header "SDL_copying.h"
+        export *
+    }
+    
+    explicit module SDL_hints {
+        header "SDL_hints.h"
+        export *
+    }
+    
+    explicit module SDL_name {
+        header "SDL_name.h"
+        export *
+    }
+
+    explicit module SDL_revision {
+        header "SDL_revision.h"
+        export *
+    }
+    
+    explicit module SDL_shape {
+        header "SDL_shape.h"
+        export *
+    }
+    
+    explicit module SDL_syswm {
+        header "SDL_syswm.h"
+        export *
+    }
+    
+    module SDL_types {
+        exclude header "SDL_types.h"
+        export SDL2.SDL_stdinc
+    }
+    
+    explicit module SDL_opengl {
+        requires OpenGL
+        header "SDL_opengl.h"
+        export *
+        
+        explicit module glext {
+            header "SDL_opengl_glext.h"
+            export *
+        }
+    }
+    
+    explicit module SDL_vulkan {
+        header "SDL_vulkan.h"
+        export *
+    }
+    
+    explicit module SDL_opengles {
+        requires GLES
+        header "SDL_opengles.h"
+        export *
+    }
+    
+    explicit module SDL_opengles2 {
+        requires GLES2
+        header "SDL_opengles2.h"
+        export *
+        
+        module gl2 {
+            header "SDL_opengles2_gl2.h"
+            
+            module ext {
+                header "SDL_opengles2_gl2ext.h"
+                export *
+            }
+            
+            module platform {
+                header "SDL_opengles2_gl2platform.h"
+                export *
+            }
+
+            export *
+        }
+        
+        module khrplatform {
+            header "SDL_opengles2_khrplatform.h"
+            export *
+        }
+    }
+}

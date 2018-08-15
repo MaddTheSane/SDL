@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten/emscripten.h>

@@ -121,7 +121,7 @@ struct RingBuffer {
 
 #pragma mark HIDBLEDevice Definition
 
-enum BLEDeviceWaitState
+typedef NS_ENUM(char, BLEDeviceWaitState) 
 {
 	None,
 	Waiting,

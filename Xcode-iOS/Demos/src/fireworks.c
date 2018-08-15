@@ -52,9 +52,9 @@ void spawnTrailFromEmitter(struct particle *emitter);
 void spawnEmitterParticle(GLfloat x, GLfloat y);
 void explodeEmitter(struct particle *emitter);
 void initializeParticles(void);
-void initializeTexture();
+void initializeTexture(void);
 int nextPowerOfTwo(int x);
-void drawParticles();
+void drawParticles(void);
 void stepParticles(double deltaTime);
 
 /*  helper function (used in texture loading)
