@@ -58,13 +58,13 @@ struct _SDL_GameController;
 typedef struct _SDL_GameController SDL_GameController;
 
 
-typedef enum
+typedef SDL_ENUM(int, SDL_GameControllerBindType)
 {
     SDL_CONTROLLER_BINDTYPE_NONE = 0,
     SDL_CONTROLLER_BINDTYPE_BUTTON,
     SDL_CONTROLLER_BINDTYPE_AXIS,
     SDL_CONTROLLER_BINDTYPE_HAT
-} SDL_GameControllerBindType;
+};
 
 /**
  *  Get the SDL joystick layer binding for this controller button/axis mapping
@@ -262,7 +262,7 @@ extern DECLSPEC void SDLCALL SDL_GameControllerUpdate(void);
  *
  *  Trigger axis values range from 0 to SDL_JOYSTICK_AXIS_MAX.
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_GameControllerAxis)
 {
     SDL_CONTROLLER_AXIS_INVALID = -1,
     SDL_CONTROLLER_AXIS_LEFTX,
@@ -272,7 +272,7 @@ typedef enum
     SDL_CONTROLLER_AXIS_TRIGGERLEFT,
     SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
     SDL_CONTROLLER_AXIS_MAX
-} SDL_GameControllerAxis;
+};
 
 /**
  *  turn this string into a axis mapping
@@ -306,7 +306,7 @@ SDL_GameControllerGetAxis(SDL_GameController *gamecontroller,
 /**
  *  The list of buttons available from a controller
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_GameControllerButton)
 {
     SDL_CONTROLLER_BUTTON_INVALID = -1,
     SDL_CONTROLLER_BUTTON_A,
@@ -325,7 +325,7 @@ typedef enum
     SDL_CONTROLLER_BUTTON_DPAD_LEFT,
     SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
     SDL_CONTROLLER_BUTTON_MAX
-} SDL_GameControllerButton;
+};
 
 /**
  *  turn this string into a button mapping

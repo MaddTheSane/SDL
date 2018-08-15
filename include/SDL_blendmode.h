@@ -37,7 +37,7 @@ extern "C" {
 /**
  *  \brief The blend mode used in SDL_RenderCopy() and drawing operations.
  */
-typedef enum
+typedef SDL_OPTIONS(Uint32, SDL_BlendMode)
 {
     SDL_BLENDMODE_NONE = 0x00000000,     /**< no blending
                                               dstRGBA = srcRGBA */
@@ -54,12 +54,12 @@ typedef enum
 
     /* Additional custom blend modes can be returned by SDL_ComposeCustomBlendMode() */
 
-} SDL_BlendMode;
+};
 
 /**
  *  \brief The blend operation used when combining source and destination pixel components
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_BlendOperation)
 {
     SDL_BLENDOPERATION_ADD              = 0x1,  /**< dst + src: supported by all renderers */
     SDL_BLENDOPERATION_SUBTRACT         = 0x2,  /**< dst - src : supported by D3D9, D3D11, OpenGL, OpenGLES */
@@ -67,12 +67,12 @@ typedef enum
     SDL_BLENDOPERATION_MINIMUM          = 0x4,  /**< min(dst, src) : supported by D3D11 */
     SDL_BLENDOPERATION_MAXIMUM          = 0x5   /**< max(dst, src) : supported by D3D11 */
 
-} SDL_BlendOperation;
+};
 
 /**
  *  \brief The normalized factor used to multiply pixel components
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_BlendFactor)
 {
     SDL_BLENDFACTOR_ZERO                = 0x1,  /**< 0, 0, 0, 0 */
     SDL_BLENDFACTOR_ONE                 = 0x2,  /**< 1, 1, 1, 1 */
@@ -85,7 +85,7 @@ typedef enum
     SDL_BLENDFACTOR_DST_ALPHA           = 0x9,  /**< dstA, dstA, dstA, dstA */
     SDL_BLENDFACTOR_ONE_MINUS_DST_ALPHA = 0xA   /**< 1-dstA, 1-dstA, 1-dstA, 1-dstA */
 
-} SDL_BlendFactor;
+};
 
 /**
  *  \brief Create a custom blend mode, which may or may not be supported by a given renderer

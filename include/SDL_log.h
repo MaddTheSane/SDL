@@ -99,7 +99,7 @@ enum
 /**
  *  \brief The predefined log priorities
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_LogPriority)
 {
     SDL_LOG_PRIORITY_VERBOSE = 1,
     SDL_LOG_PRIORITY_DEBUG,
@@ -108,7 +108,7 @@ typedef enum
     SDL_LOG_PRIORITY_ERROR,
     SDL_LOG_PRIORITY_CRITICAL,
     SDL_NUM_LOG_PRIORITIES
-} SDL_LogPriority;
+};
 
 
 /**

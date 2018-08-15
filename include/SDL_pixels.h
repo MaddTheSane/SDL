@@ -168,7 +168,7 @@ enum
     ((format) && (SDL_PIXELFLAG(format) != 1))
 
 /* Note: If you modify this list, update SDL_GetPixelFormatName() */
-enum
+SDL_ENUM(Uint32)
 {
     SDL_PIXELFORMAT_UNKNOWN,
     SDL_PIXELFORMAT_INDEX1LSB =

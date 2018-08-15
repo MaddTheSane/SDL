@@ -113,7 +113,7 @@ extern "C" {
 /**
  *  These are the various supported windowing subsystems
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_SYSWM_TYPE)
 {
     SDL_SYSWM_UNKNOWN,
     SDL_SYSWM_WINDOWS,
@@ -127,7 +127,7 @@ typedef enum
     SDL_SYSWM_ANDROID,
     SDL_SYSWM_VIVANTE,
     SDL_SYSWM_OS2
-} SDL_SYSWM_TYPE;
+};
 
 /**
  *  The custom event structure.

@@ -56,12 +56,12 @@ typedef unsigned int SDL_TLSID;
  *
  *  \note On many systems you require special privileges to set high or time critical priority.
  */
-typedef enum {
+typedef SDL_ENUM(int, SDL_ThreadPriority) {
     SDL_THREAD_PRIORITY_LOW,
     SDL_THREAD_PRIORITY_NORMAL,
     SDL_THREAD_PRIORITY_HIGH,
     SDL_THREAD_PRIORITY_TIME_CRITICAL
-} SDL_ThreadPriority;
+};
 
 /**
  *  The function passed to SDL_CreateThread().

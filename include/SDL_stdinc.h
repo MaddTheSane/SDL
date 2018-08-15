@@ -123,6 +123,37 @@ char *alloca();
 #define SDL_STRINGIFY_ARG(arg)  #arg
 
 /**
+ *  \name Fixed-sized enum declaration
+ *
+ *  Defines the size of the enums, so the compiler doesn't have to guess.
+ */
+/* @{ */
+#if __has_attribute(enum_extensibility)
+#define __SDL_ENUM_ATTRIBUTES __attribute__((enum_extensibility(open)))
+#define __SDL_OPTIONS_ATTRIBUTES __attribute__((flag_enum,enum_extensibility(open)))
+#else
+#define __SDL_ENUM_ATTRIBUTES
+#define __SDL_OPTIONS_ATTRIBUTES
+#endif
+
+#define __SDL_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
+#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#define __SDL_NAMED_ENUM(_type, _name)     enum __SDL_ENUM_ATTRIBUTES _name : _type _name; enum _name : _type
+#define __SDL_ANON_ENUM(_type)             enum __SDL_ENUM_ATTRIBUTES : _type
+#if (__cplusplus)
+#define SDL_OPTIONS(_type, _name) _type _name; enum __SDL_OPTIONS_ATTRIBUTES : _type
+#else
+#define SDL_OPTIONS(_type, _name) enum __SDL_OPTIONS_ATTRIBUTES _name : _type _name; enum _name : _type
+#endif
+#else
+#define __SDL_NAMED_ENUM(_type, _name) _type _name; enum
+#define __SDL_ANON_ENUM(_type) enum
+#define SDL_OPTIONS(_type, _name) _type _name; enum
+#endif
+#define SDL_ENUM(...) __SDL_ENUM_GET_MACRO(__VA_ARGS__, __SDL_NAMED_ENUM, __SDL_ANON_ENUM, )(__VA_ARGS__)
+/* @} *//* Fixed-sized enum declaration */
+
+/**
  *  \name Cast operators
  *
  *  Use proper C++ casts when compiled as C++ to be compatible with the option
@@ -158,11 +189,13 @@ char *alloca();
 #define SDL_TRUE 1
 typedef int SDL_bool;
 #else
-typedef enum
+// int to maintain compatibility with existing code.
+// could be changed to a char or unsigned char instead.
+typedef SDL_ENUM(int, SDL_bool)
 {
     SDL_FALSE = 0,
     SDL_TRUE = 1
-} SDL_bool;
+};
 #endif
 
 /**

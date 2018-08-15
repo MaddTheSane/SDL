@@ -52,7 +52,7 @@ extern DECLSPEC void SDLCALL SDL_ClearError(void);
 #define SDL_OutOfMemory()   SDL_Error(SDL_ENOMEM)
 #define SDL_Unsupported()   SDL_Error(SDL_UNSUPPORTED)
 #define SDL_InvalidParamError(param)    SDL_SetError("Parameter '%s' is invalid", (param))
-typedef enum
+typedef SDL_ENUM(int, SDL_errorcode)
 {
     SDL_ENOMEM,
     SDL_EFREAD,
@@ -60,7 +60,7 @@ typedef enum
     SDL_EFSEEK,
     SDL_UNSUPPORTED,
     SDL_LASTERROR
-} SDL_errorcode;
+};
 /* SDL_Error() unconditionally returns -1. */
 extern DECLSPEC int SDLCALL SDL_Error(SDL_errorcode code);
 /* @} *//* Internal error functions */

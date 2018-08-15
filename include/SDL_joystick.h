@@ -80,7 +80,7 @@ typedef struct {
  */
 typedef Sint32 SDL_JoystickID;
 
-typedef enum
+typedef SDL_ENUM(int, SDL_JoystickType)
 {
     SDL_JOYSTICK_TYPE_UNKNOWN,
     SDL_JOYSTICK_TYPE_GAMECONTROLLER,
@@ -92,9 +92,9 @@ typedef enum
     SDL_JOYSTICK_TYPE_DRUM_KIT,
     SDL_JOYSTICK_TYPE_ARCADE_PAD,
     SDL_JOYSTICK_TYPE_THROTTLE
-} SDL_JoystickType;
+};
 
-typedef enum
+typedef SDL_ENUM(int, SDL_JoystickPowerLevel)
 {
     SDL_JOYSTICK_POWER_UNKNOWN = -1,
     SDL_JOYSTICK_POWER_EMPTY,   /* <= 5% */
@@ -103,7 +103,7 @@ typedef enum
     SDL_JOYSTICK_POWER_FULL,    /* <= 100% */
     SDL_JOYSTICK_POWER_WIRED,
     SDL_JOYSTICK_POWER_MAX
-} SDL_JoystickPowerLevel;
+};
 
 /* Function prototypes */
 
@@ -313,15 +313,17 @@ extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick * 
  *  \name Hat positions
  */
 /* @{ */
-#define SDL_HAT_CENTERED    0x00
-#define SDL_HAT_UP          0x01
-#define SDL_HAT_RIGHT       0x02
-#define SDL_HAT_DOWN        0x04
-#define SDL_HAT_LEFT        0x08
-#define SDL_HAT_RIGHTUP     (SDL_HAT_RIGHT|SDL_HAT_UP)
-#define SDL_HAT_RIGHTDOWN   (SDL_HAT_RIGHT|SDL_HAT_DOWN)
-#define SDL_HAT_LEFTUP      (SDL_HAT_LEFT|SDL_HAT_UP)
-#define SDL_HAT_LEFTDOWN    (SDL_HAT_LEFT|SDL_HAT_DOWN)
+typedef SDL_OPTIONS(Uint8, SDL_HatPosition) {
+    SDL_HAT_CENTERED    = 0x00,
+    SDL_HAT_UP          = 0x01,
+    SDL_HAT_RIGHT       = 0x02,
+    SDL_HAT_DOWN        = 0x04,
+    SDL_HAT_LEFT        = 0x08,
+    SDL_HAT_RIGHTUP     = (SDL_HAT_RIGHT|SDL_HAT_UP),
+    SDL_HAT_RIGHTDOWN   = (SDL_HAT_RIGHT|SDL_HAT_DOWN),
+    SDL_HAT_LEFTUP      = (SDL_HAT_LEFT|SDL_HAT_UP),
+    SDL_HAT_LEFTDOWN    = (SDL_HAT_LEFT|SDL_HAT_DOWN)
+};
 /* @} */
 
 /**
@@ -340,8 +342,8 @@ extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick * 
  *           - ::SDL_HAT_LEFTUP
  *           - ::SDL_HAT_LEFTDOWN
  */
-extern DECLSPEC Uint8 SDLCALL SDL_JoystickGetHat(SDL_Joystick * joystick,
-                                                 int hat);
+extern DECLSPEC SDL_HatPosition SDLCALL SDL_JoystickGetHat(SDL_Joystick * joystick,
+                                                           int hat);
 
 /**
  *  Get the ball axis change since the last poll.

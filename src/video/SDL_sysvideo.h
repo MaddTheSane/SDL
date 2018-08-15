@@ -80,8 +80,8 @@ struct SDL_Window
     int w, h;
     int min_w, min_h;
     int max_w, max_h;
-    Uint32 flags;
-    Uint32 last_fullscreen_flags;
+    SDL_WindowFlags flags;
+    SDL_WindowFlags last_fullscreen_flags;
 
     /* Stored position and size for windowed mode */
     SDL_Rect windowed;
@@ -342,10 +342,10 @@ struct SDL_VideoDevice
         int major_version;
         int minor_version;
         int flags;
-        int profile_mask;
+        SDL_GLprofile profile_mask;
         int share_with_current_context;
-        int release_behavior;
-        int reset_notification;
+        SDL_GLcontextReleaseFlag release_behavior;
+        SDL_GLContextResetNotification reset_notification;
         int framebuffer_srgb_capable;
         int no_error;
         int retained_backing;

@@ -391,12 +391,12 @@ extern DECLSPEC SDL_AudioDeviceID SDLCALL SDL_OpenAudioDevice(const char
  *  Get the current audio state.
  */
 /* @{ */
-typedef enum
+typedef SDL_ENUM(int, SDL_AudioStatus)
 {
     SDL_AUDIO_STOPPED = 0,
     SDL_AUDIO_PLAYING,
     SDL_AUDIO_PAUSED
-} SDL_AudioStatus;
+};
 extern DECLSPEC SDL_AudioStatus SDLCALL SDL_GetAudioStatus(void);
 
 extern DECLSPEC SDL_AudioStatus SDLCALL

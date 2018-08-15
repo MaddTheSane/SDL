@@ -94,7 +94,7 @@ typedef struct SDL_Window SDL_Window;
  *
  *  \sa SDL_GetWindowFlags()
  */
-typedef enum
+typedef SDL_OPTIONS(Uint32, SDL_WindowFlags)
 {
     /* !!! FIXME: change this to name = (1<<x). */
     SDL_WINDOW_FULLSCREEN = 0x00000001,         /**< fullscreen window */
@@ -120,7 +120,7 @@ typedef enum
     SDL_WINDOW_TOOLTIP       = 0x00040000,      /**< window should be treated as a tooltip */
     SDL_WINDOW_POPUP_MENU    = 0x00080000,      /**< window should be treated as a popup menu */
     SDL_WINDOW_VULKAN        = 0x10000000       /**< window usable for Vulkan surface */
-} SDL_WindowFlags;
+};
 
 /**
  *  \brief Used to indicate that you don't care what the window position is.
@@ -143,7 +143,7 @@ typedef enum
 /**
  *  \brief Event subtype for window events
  */
-typedef enum
+typedef SDL_ENUM(Uint8, SDL_WindowEventID)
 {
     SDL_WINDOWEVENT_NONE,           /**< Never used */
     SDL_WINDOWEVENT_SHOWN,          /**< Window has been shown */
@@ -167,7 +167,7 @@ typedef enum
     SDL_WINDOWEVENT_CLOSE,          /**< The window manager requests that the window be closed */
     SDL_WINDOWEVENT_TAKE_FOCUS,     /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
     SDL_WINDOWEVENT_HIT_TEST        /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
-} SDL_WindowEventID;
+};
 
 /**
  *  \brief An opaque handle to an OpenGL context.
@@ -177,7 +177,7 @@ typedef void *SDL_GLContext;
 /**
  *  \brief OpenGL configuration attributes
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_GLattr)
 {
     SDL_GL_RED_SIZE,
     SDL_GL_GREEN_SIZE,
@@ -206,34 +206,34 @@ typedef enum
     SDL_GL_CONTEXT_RELEASE_BEHAVIOR,
     SDL_GL_CONTEXT_RESET_NOTIFICATION,
     SDL_GL_CONTEXT_NO_ERROR
-} SDL_GLattr;
+};
 
-typedef enum
+typedef SDL_OPTIONS(int, SDL_GLprofile)
 {
     SDL_GL_CONTEXT_PROFILE_CORE           = 0x0001,
     SDL_GL_CONTEXT_PROFILE_COMPATIBILITY  = 0x0002,
     SDL_GL_CONTEXT_PROFILE_ES             = 0x0004 /**< GLX_CONTEXT_ES2_PROFILE_BIT_EXT */
-} SDL_GLprofile;
+};
 
-typedef enum
+typedef SDL_OPTIONS(Uint32, SDL_GLcontextFlag)
 {
     SDL_GL_CONTEXT_DEBUG_FLAG              = 0x0001,
     SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
     SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG      = 0x0004,
     SDL_GL_CONTEXT_RESET_ISOLATION_FLAG    = 0x0008
-} SDL_GLcontextFlag;
+};
 
-typedef enum
+typedef SDL_OPTIONS(int, SDL_GLcontextReleaseFlag)
 {
     SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE   = 0x0000,
     SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH  = 0x0001
-} SDL_GLcontextReleaseFlag;
+};
 
-typedef enum
+typedef SDL_ENUM(int, SDL_GLContextResetNotification)
 {
     SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000,
     SDL_GL_CONTEXT_RESET_LOSE_CONTEXT    = 0x0001
-} SDL_GLContextResetNotification;
+};
 
 /* Function prototypes */
 
@@ -487,7 +487,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetWindowPixelFormat(SDL_Window * window);
  */
 extern DECLSPEC SDL_Window * SDLCALL SDL_CreateWindow(const char *title,
                                                       int x, int y, int w,
-                                                      int h, Uint32 flags);
+                                                      int h, SDL_WindowFlags flags);
 
 /**
  *  \brief Create an SDL window from an existing native window.
@@ -800,7 +800,7 @@ extern DECLSPEC void SDLCALL SDL_RestoreWindow(SDL_Window * window);
  *  \sa SDL_GetWindowDisplayMode()
  */
 extern DECLSPEC int SDLCALL SDL_SetWindowFullscreen(SDL_Window * window,
-                                                    Uint32 flags);
+                                                    SDL_WindowFlags flags);
 
 /**
  *  \brief Get the SDL surface associated with the window.
@@ -990,7 +990,7 @@ extern DECLSPEC int SDLCALL SDL_GetWindowGammaRamp(SDL_Window * window,
  *
  *  \sa SDL_HitTest
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_HitTestResult)
 {
     SDL_HITTEST_NORMAL,  /**< Region is normal. No special properties. */
     SDL_HITTEST_DRAGGABLE,  /**< Region can drag entire window. */
@@ -1002,7 +1002,7 @@ typedef enum
     SDL_HITTEST_RESIZE_BOTTOM,
     SDL_HITTEST_RESIZE_BOTTOMLEFT,
     SDL_HITTEST_RESIZE_LEFT
-} SDL_HitTestResult;
+};
 
 /**
  *  \brief Callback used for hit-testing.

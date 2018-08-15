@@ -47,7 +47,7 @@ typedef Sint32 SDL_Keycode;
 #define SDLK_SCANCODE_MASK (1<<30)
 #define SDL_SCANCODE_TO_KEYCODE(X)  (X | SDLK_SCANCODE_MASK)
 
-enum
+SDL_ENUM(SDL_Keycode)
 {
     SDLK_UNKNOWN = 0,
 
@@ -322,7 +322,7 @@ enum
 /**
  * \brief Enumeration of valid key mods (possibly OR'd together).
  */
-typedef enum
+typedef SDL_OPTIONS(Uint16, SDL_Keymod)
 {
     KMOD_NONE = 0x0000,
     KMOD_LSHIFT = 0x0001,
@@ -336,13 +336,13 @@ typedef enum
     KMOD_NUM = 0x1000,
     KMOD_CAPS = 0x2000,
     KMOD_MODE = 0x4000,
-    KMOD_RESERVED = 0x8000
-} SDL_Keymod;
-
-#define KMOD_CTRL   (KMOD_LCTRL|KMOD_RCTRL)
-#define KMOD_SHIFT  (KMOD_LSHIFT|KMOD_RSHIFT)
-#define KMOD_ALT    (KMOD_LALT|KMOD_RALT)
-#define KMOD_GUI    (KMOD_LGUI|KMOD_RGUI)
+    KMOD_RESERVED = 0x8000,
+    
+    KMOD_CTRL = (KMOD_LCTRL|KMOD_RCTRL),
+    KMOD_SHIFT = (KMOD_LSHIFT|KMOD_RSHIFT),
+    KMOD_ALT = (KMOD_LALT|KMOD_RALT),
+    KMOD_GUI = (KMOD_LGUI|KMOD_RGUI)
+};
 
 #endif /* SDL_keycode_h_ */
 

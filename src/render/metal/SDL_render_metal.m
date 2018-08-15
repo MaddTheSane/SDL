@@ -121,13 +121,13 @@ static const size_t CONSTANTS_OFFSET_DECODE_BT709 = ALIGN_CONSTANTS(CONSTANTS_OF
 static const size_t CONSTANTS_OFFSET_CLEAR_VERTS = ALIGN_CONSTANTS(CONSTANTS_OFFSET_DECODE_BT709 + sizeof(float) * 4 * 4);
 static const size_t CONSTANTS_LENGTH = CONSTANTS_OFFSET_CLEAR_VERTS + sizeof(float) * 6;
 
-typedef enum SDL_MetalVertexFunction
+typedef SDL_ENUM(int, SDL_MetalVertexFunction)
 {
     SDL_METAL_VERTEX_SOLID,
     SDL_METAL_VERTEX_COPY,
-} SDL_MetalVertexFunction;
+};
 
-typedef enum SDL_MetalFragmentFunction
+typedef SDL_ENUM(int, SDL_MetalFragmentFunction)
 {
     SDL_METAL_FRAGMENT_SOLID = 0,
     SDL_METAL_FRAGMENT_COPY,
@@ -135,7 +135,7 @@ typedef enum SDL_MetalFragmentFunction
     SDL_METAL_FRAGMENT_NV12,
     SDL_METAL_FRAGMENT_NV21,
     SDL_METAL_FRAGMENT_COUNT,
-} SDL_MetalFragmentFunction;
+};
 
 typedef struct METAL_PipelineState
 {

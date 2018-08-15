@@ -61,7 +61,7 @@ extern "C" {
 /**
  *  \brief Flags used when creating a rendering context
  */
-typedef enum
+typedef SDL_OPTIONS(Uint32, SDL_RendererFlags)
 {
     SDL_RENDERER_SOFTWARE = 0x00000001,         /**< The renderer is a software fallback */
     SDL_RENDERER_ACCELERATED = 0x00000002,      /**< The renderer uses hardware
@@ -70,7 +70,7 @@ typedef enum
                                                      with the refresh rate */
     SDL_RENDERER_TARGETTEXTURE = 0x00000008     /**< The renderer supports
                                                      rendering to texture */
-} SDL_RendererFlags;
+};
 
 /**
  *  \brief Information on the capabilities of a render driver or context.
@@ -78,7 +78,7 @@ typedef enum
 typedef struct SDL_RendererInfo
 {
     const char *name;           /**< The name of the renderer */
-    Uint32 flags;               /**< Supported ::SDL_RendererFlags */
+    SDL_RendererFlags flags;    /**< Supported ::SDL_RendererFlags */
     Uint32 num_texture_formats; /**< The number of available texture formats */
     Uint32 texture_formats[16]; /**< The available texture formats */
     int max_texture_width;      /**< The maximum texture width */
@@ -88,32 +88,32 @@ typedef struct SDL_RendererInfo
 /**
  *  \brief The access pattern allowed for a texture.
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_TextureAccess)
 {
     SDL_TEXTUREACCESS_STATIC,    /**< Changes rarely, not lockable */
     SDL_TEXTUREACCESS_STREAMING, /**< Changes frequently, lockable */
     SDL_TEXTUREACCESS_TARGET     /**< Texture can be used as a render target */
-} SDL_TextureAccess;
+};
 
 /**
  *  \brief The texture channel modulation used in SDL_RenderCopy().
  */
-typedef enum
+typedef SDL_OPTIONS(int, SDL_TextureModulate)
 {
     SDL_TEXTUREMODULATE_NONE = 0x00000000,     /**< No modulation */
     SDL_TEXTUREMODULATE_COLOR = 0x00000001,    /**< srcC = srcC * color */
     SDL_TEXTUREMODULATE_ALPHA = 0x00000002     /**< srcA = srcA * alpha */
-} SDL_TextureModulate;
+};
 
 /**
  *  \brief Flip constants for SDL_RenderCopyEx
  */
-typedef enum
+typedef SDL_OPTIONS(int, SDL_RendererFlip)
 {
     SDL_FLIP_NONE = 0x00000000,     /**< Do not flip */
     SDL_FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
     SDL_FLIP_VERTICAL = 0x00000002     /**< flip vertically */
-} SDL_RendererFlip;
+};
 
 /**
  *  \brief A structure representing rendering state
@@ -170,7 +170,7 @@ extern DECLSPEC int SDLCALL SDL_GetRenderDriverInfo(int index,
  *  \return 0 on success, or -1 on error
  */
 extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(
-                                int width, int height, Uint32 window_flags,
+                                int width, int height, SDL_WindowFlags window_flags,
                                 SDL_Window **window, SDL_Renderer **renderer);
 
 
@@ -189,7 +189,7 @@ extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(
  *  \sa SDL_DestroyRenderer()
  */
 extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window * window,
-                                               int index, Uint32 flags);
+                                               int index, SDL_RendererFlags flags);
 
 /**
  *  \brief Create a 2D software rendering context for a surface.
@@ -241,7 +241,7 @@ extern DECLSPEC int SDLCALL SDL_GetRendererOutputSize(SDL_Renderer * renderer,
  */
 extern DECLSPEC SDL_Texture * SDLCALL SDL_CreateTexture(SDL_Renderer * renderer,
                                                         Uint32 format,
-                                                        int access, int w,
+                                                        SDL_TextureAccess access, int w,
                                                         int h);
 
 /**
@@ -273,7 +273,7 @@ extern DECLSPEC SDL_Texture * SDLCALL SDL_CreateTextureFromSurface(SDL_Renderer 
  *  \return 0 on success, or -1 if the texture is not valid.
  */
 extern DECLSPEC int SDLCALL SDL_QueryTexture(SDL_Texture * texture,
-                                             Uint32 * format, int *access,
+                                             Uint32 * format, SDL_TextureAccess *access,
                                              int *w, int *h);
 
 /**
