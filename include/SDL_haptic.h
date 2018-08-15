@@ -142,188 +142,191 @@ typedef struct _SDL_Haptic SDL_Haptic;
  */
 /* @{ */
 
-/**
- *  \brief Constant effect supported.
- *
- *  Constant haptic effect.
- *
- *  \sa SDL_HapticCondition
- */
-#define SDL_HAPTIC_CONSTANT   (1u<<0)
-
-/**
- *  \brief Sine wave effect supported.
- *
- *  Periodic haptic effect that simulates sine waves.
- *
- *  \sa SDL_HapticPeriodic
- */
-#define SDL_HAPTIC_SINE       (1u<<1)
-
-/**
- *  \brief Left/Right effect supported.
- *
- *  Haptic effect for direct control over high/low frequency motors.
- *
- *  \sa SDL_HapticLeftRight
- * \warning this value was SDL_HAPTIC_SQUARE right before 2.0.0 shipped. Sorry,
- *          we ran out of bits, and this is important for XInput devices.
- */
-#define SDL_HAPTIC_LEFTRIGHT     (1u<<2)
-
-/* !!! FIXME: put this back when we have more bits in 2.1 */
-/* #define SDL_HAPTIC_SQUARE     (1<<2) */
-
-/**
- *  \brief Triangle wave effect supported.
- *
- *  Periodic haptic effect that simulates triangular waves.
- *
- *  \sa SDL_HapticPeriodic
- */
-#define SDL_HAPTIC_TRIANGLE   (1u<<3)
-
-/**
- *  \brief Sawtoothup wave effect supported.
- *
- *  Periodic haptic effect that simulates saw tooth up waves.
- *
- *  \sa SDL_HapticPeriodic
- */
-#define SDL_HAPTIC_SAWTOOTHUP (1u<<4)
-
-/**
- *  \brief Sawtoothdown wave effect supported.
- *
- *  Periodic haptic effect that simulates saw tooth down waves.
- *
- *  \sa SDL_HapticPeriodic
- */
-#define SDL_HAPTIC_SAWTOOTHDOWN (1u<<5)
-
-/**
- *  \brief Ramp effect supported.
- *
- *  Ramp haptic effect.
- *
- *  \sa SDL_HapticRamp
- */
-#define SDL_HAPTIC_RAMP       (1u<<6)
-
-/**
- *  \brief Spring effect supported - uses axes position.
- *
- *  Condition haptic effect that simulates a spring.  Effect is based on the
- *  axes position.
- *
- *  \sa SDL_HapticCondition
- */
-#define SDL_HAPTIC_SPRING     (1u<<7)
-
-/**
- *  \brief Damper effect supported - uses axes velocity.
- *
- *  Condition haptic effect that simulates dampening.  Effect is based on the
- *  axes velocity.
- *
- *  \sa SDL_HapticCondition
- */
-#define SDL_HAPTIC_DAMPER     (1u<<8)
-
-/**
- *  \brief Inertia effect supported - uses axes acceleration.
- *
- *  Condition haptic effect that simulates inertia.  Effect is based on the axes
- *  acceleration.
- *
- *  \sa SDL_HapticCondition
- */
-#define SDL_HAPTIC_INERTIA    (1u<<9)
-
-/**
- *  \brief Friction effect supported - uses axes movement.
- *
- *  Condition haptic effect that simulates friction.  Effect is based on the
- *  axes movement.
- *
- *  \sa SDL_HapticCondition
- */
-#define SDL_HAPTIC_FRICTION   (1u<<10)
-
-/**
- *  \brief Custom effect is supported.
- *
- *  User defined custom haptic effect.
- */
-#define SDL_HAPTIC_CUSTOM     (1u<<11)
-
-/* @} *//* Haptic effects */
-
-/* These last few are features the device has, not effects */
-
-/**
- *  \brief Device can set global gain.
- *
- *  Device supports setting the global gain.
- *
- *  \sa SDL_HapticSetGain
- */
-#define SDL_HAPTIC_GAIN       (1u<<12)
-
-/**
- *  \brief Device can set autocenter.
- *
- *  Device supports setting autocenter.
- *
- *  \sa SDL_HapticSetAutocenter
- */
-#define SDL_HAPTIC_AUTOCENTER (1u<<13)
-
-/**
- *  \brief Device can be queried for effect status.
- *
- *  Device supports querying effect status.
- *
- *  \sa SDL_HapticGetEffectStatus
- */
-#define SDL_HAPTIC_STATUS     (1u<<14)
-
-/**
- *  \brief Device can be paused.
- *
- *  Devices supports being paused.
- *
- *  \sa SDL_HapticPause
- *  \sa SDL_HapticUnpause
- */
-#define SDL_HAPTIC_PAUSE      (1u<<15)
-
+typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
+    /**
+     *  \brief Constant effect supported.
+     *
+     *  Constant haptic effect.
+     *
+     *  \sa SDL_HapticCondition
+     */
+    SDL_HAPTIC_CONSTANT   = (1u<<0),
+    
+    /**
+     *  \brief Sine wave effect supported.
+     *
+     *  Periodic haptic effect that simulates sine waves.
+     *
+     *  \sa SDL_HapticPeriodic
+     */
+    SDL_HAPTIC_SINE      = (1u<<1),
+    
+    /**
+     *  \brief Left/Right effect supported.
+     *
+     *  Haptic effect for direct control over high/low frequency motors.
+     *
+     *  \sa SDL_HapticLeftRight
+     * \warning this value was SDL_HAPTIC_SQUARE right before 2.0.0 shipped. Sorry,
+     *          we ran out of bits, and this is important for XInput devices.
+     */
+    SDL_HAPTIC_LEFTRIGHT    = (1u<<2),
+    
+    /* !!! FIXME: put this back when we have more bits in 2.1 */
+    /* #define SDL_HAPTIC_SQUARE     (1<<2) */
+    
+    /**
+     *  \brief Triangle wave effect supported.
+     *
+     *  Periodic haptic effect that simulates triangular waves.
+     *
+     *  \sa SDL_HapticPeriodic
+     */
+    SDL_HAPTIC_TRIANGLE  = (1u<<3),
+    
+    /**
+     *  \brief Sawtoothup wave effect supported.
+     *
+     *  Periodic haptic effect that simulates saw tooth up waves.
+     *
+     *  \sa SDL_HapticPeriodic
+     */
+    SDL_HAPTIC_SAWTOOTHUP = (1u<<4),
+    
+    /**
+     *  \brief Sawtoothdown wave effect supported.
+     *
+     *  Periodic haptic effect that simulates saw tooth down waves.
+     *
+     *  \sa SDL_HapticPeriodic
+     */
+    SDL_HAPTIC_SAWTOOTHDOWN = (1u<<5),
+    
+    /**
+     *  \brief Ramp effect supported.
+     *
+     *  Ramp haptic effect.
+     *
+     *  \sa SDL_HapticRamp
+     */
+    SDL_HAPTIC_RAMP      = (1u<<6),
+    
+    /**
+     *  \brief Spring effect supported - uses axes position.
+     *
+     *  Condition haptic effect that simulates a spring.  Effect is based on the
+     *  axes position.
+     *
+     *  \sa SDL_HapticCondition
+     */
+    SDL_HAPTIC_SPRING    = (1u<<7),
+    
+    /**
+     *  \brief Damper effect supported - uses axes velocity.
+     *
+     *  Condition haptic effect that simulates dampening.  Effect is based on the
+     *  axes velocity.
+     *
+     *  \sa SDL_HapticCondition
+     */
+    SDL_HAPTIC_DAMPER    = (1u<<8),
+    
+    /**
+     *  \brief Inertia effect supported - uses axes acceleration.
+     *
+     *  Condition haptic effect that simulates inertia.  Effect is based on the axes
+     *  acceleration.
+     *
+     *  \sa SDL_HapticCondition
+     */
+    SDL_HAPTIC_INERTIA    = (1u<<9),
+    
+    /**
+     *  \brief Friction effect supported - uses axes movement.
+     *
+     *  Condition haptic effect that simulates friction.  Effect is based on the
+     *  axes movement.
+     *
+     *  \sa SDL_HapticCondition
+     */
+    SDL_HAPTIC_FRICTION  = (1u<<10),
+    
+    /**
+     *  \brief Custom effect is supported.
+     *
+     *  User defined custom haptic effect.
+     */
+    SDL_HAPTIC_CUSTOM    = (1u<<11),
+    
+    /* @} *//* Haptic effects */
+    
+    /* These last few are features the device has, not effects */
+    
+    /**
+     *  \brief Device can set global gain.
+     *
+     *  Device supports setting the global gain.
+     *
+     *  \sa SDL_HapticSetGain
+     */
+    SDL_HAPTIC_GAIN      = (1u<<12),
+    
+    /**
+     *  \brief Device can set autocenter.
+     *
+     *  Device supports setting autocenter.
+     *
+     *  \sa SDL_HapticSetAutocenter
+     */
+    SDL_HAPTIC_AUTOCENTER = (1u<<13),
+    
+    /**
+     *  \brief Device can be queried for effect status.
+     *
+     *  Device supports querying effect status.
+     *
+     *  \sa SDL_HapticGetEffectStatus
+     */
+    SDL_HAPTIC_STATUS    = (1u<<14),
+    
+    /**
+     *  \brief Device can be paused.
+     *
+     *  Devices supports being paused.
+     *
+     *  \sa SDL_HapticPause
+     *  \sa SDL_HapticUnpause
+     */
+    SDL_HAPTIC_PAUSE     = (1u<<15)
+};
 
 /**
  * \name Direction encodings
  */
 /* @{ */
 
-/**
- *  \brief Uses polar coordinates for the direction.
- *
- *  \sa SDL_HapticDirection
- */
-#define SDL_HAPTIC_POLAR      0
-
-/**
- *  \brief Uses cartesian coordinates for the direction.
- *
- *  \sa SDL_HapticDirection
- */
-#define SDL_HAPTIC_CARTESIAN  1
-
-/**
- *  \brief Uses spherical coordinates for the direction.
- *
- *  \sa SDL_HapticDirection
- */
-#define SDL_HAPTIC_SPHERICAL  2
+typedef SDL_ENUM(Uint8, SDL_HapticDirectionType) {
+    /**
+     *  \brief Uses polar coordinates for the direction.
+     *
+     *  \sa SDL_HapticDirection
+     */
+    SDL_HAPTIC_POLAR     = 0,
+    
+    /**
+     *  \brief Uses cartesian coordinates for the direction.
+     *
+     *  \sa SDL_HapticDirection
+     */
+    SDL_HAPTIC_CARTESIAN = 1,
+    
+    /**
+     *  \brief Uses spherical coordinates for the direction.
+     *
+     *  \sa SDL_HapticDirection
+     */
+    SDL_HAPTIC_SPHERICAL = 2
+};
 
 /* @} *//* Direction encodings */
 
@@ -338,7 +341,9 @@ typedef struct _SDL_Haptic SDL_Haptic;
  *
  * \sa SDL_HapticRunEffect
  */
-#define SDL_HAPTIC_INFINITY   4294967295U
+SDL_ENUM(Uint32) {
+    SDL_HAPTIC_INFINITY  = 4294967295U
+};
 
 
 /**
@@ -438,7 +443,7 @@ typedef struct _SDL_Haptic SDL_Haptic;
  */
 typedef struct SDL_HapticDirection
 {
-    Uint8 type;         /**< The type of encoding. */
+    SDL_HapticDirectionType type; /**< The type of encoding. */
     Sint32 dir[3];      /**< The encoded direction. */
 } SDL_HapticDirection;
 
@@ -457,7 +462,7 @@ typedef struct SDL_HapticDirection
 typedef struct SDL_HapticConstant
 {
     /* Header */
-    Uint16 type;            /**< ::SDL_HAPTIC_CONSTANT */
+    SDL_HapticEffectType type;      /**< ::SDL_HAPTIC_CONSTANT */
     SDL_HapticDirection direction;  /**< Direction of the effect. */
 
     /* Replay */
@@ -538,7 +543,7 @@ typedef struct SDL_HapticConstant
 typedef struct SDL_HapticPeriodic
 {
     /* Header */
-    Uint16 type;        /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
+    SDL_HapticEffectType type; /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
                              ::SDL_HAPTIC_TRIANGLE, ::SDL_HAPTIC_SAWTOOTHUP or
                              ::SDL_HAPTIC_SAWTOOTHDOWN */
     SDL_HapticDirection direction;  /**< Direction of the effect. */
@@ -591,7 +596,7 @@ typedef struct SDL_HapticPeriodic
 typedef struct SDL_HapticCondition
 {
     /* Header */
-    Uint16 type;            /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
+    SDL_HapticEffectType type; /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
                                  ::SDL_HAPTIC_INERTIA or ::SDL_HAPTIC_FRICTION */
     SDL_HapticDirection direction;  /**< Direction of the effect - Not used ATM. */
 
@@ -628,7 +633,7 @@ typedef struct SDL_HapticCondition
 typedef struct SDL_HapticRamp
 {
     /* Header */
-    Uint16 type;            /**< ::SDL_HAPTIC_RAMP */
+    SDL_HapticEffectType type;      /**< ::SDL_HAPTIC_RAMP */
     SDL_HapticDirection direction;  /**< Direction of the effect. */
 
     /* Replay */
@@ -665,7 +670,7 @@ typedef struct SDL_HapticRamp
 typedef struct SDL_HapticLeftRight
 {
     /* Header */
-    Uint16 type;            /**< ::SDL_HAPTIC_LEFTRIGHT */
+    SDL_HapticEffectType type; /**< ::SDL_HAPTIC_LEFTRIGHT */
 
     /* Replay */
     Uint32 length;          /**< Duration of the effect in milliseconds. */
@@ -693,7 +698,7 @@ typedef struct SDL_HapticLeftRight
 typedef struct SDL_HapticCustom
 {
     /* Header */
-    Uint16 type;            /**< ::SDL_HAPTIC_CUSTOM */
+    SDL_HapticEffectType type;      /**< ::SDL_HAPTIC_CUSTOM */
     SDL_HapticDirection direction;  /**< Direction of the effect. */
 
     /* Replay */
@@ -789,7 +794,7 @@ typedef struct SDL_HapticCustom
 typedef union SDL_HapticEffect
 {
     /* Common for all force feedback effects */
-    Uint16 type;                    /**< Effect type. */
+    SDL_HapticEffectType type;      /**< Effect type. */
     SDL_HapticConstant constant;    /**< Constant effect. */
     SDL_HapticPeriodic periodic;    /**< Periodic effect. */
     SDL_HapticCondition condition;  /**< Condition effect. */
@@ -972,6 +977,7 @@ extern DECLSPEC int SDLCALL SDL_HapticNumEffectsPlaying(SDL_Haptic * haptic);
  *  \sa SDL_HapticEffectSupported
  */
 extern DECLSPEC unsigned int SDLCALL SDL_HapticQuery(SDL_Haptic * haptic);
+/*TODO: change return type to SDL_HapticEffectType in 2.1 */
 
 
 /**

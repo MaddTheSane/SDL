@@ -49,10 +49,12 @@ extern "C" {
  *  Used internally (read-only).
  */
 /* @{ */
-#define SDL_SWSURFACE       0           /**< Just here for compatibility */
-#define SDL_PREALLOC        0x00000001  /**< Surface uses preallocated memory */
-#define SDL_RLEACCEL        0x00000002  /**< Surface is RLE encoded */
-#define SDL_DONTFREE        0x00000004  /**< Surface is referenced internally */
+typedef SDL_OPTIONS(Uint32, SDL_SurfaceFlag) {
+    SDL_SWSURFACE       = 0u,           /**< Just here for compatibility */
+    SDL_PREALLOC        = 0x00000001u,  /**< Surface uses preallocated memory */
+    SDL_RLEACCEL        = 0x00000002u,  /**< Surface is RLE encoded */
+    SDL_DONTFREE        = 0x00000004u   /**< Surface is referenced internally */
+};
 /* @} *//* Surface flags */
 
 /**
@@ -68,7 +70,7 @@ extern "C" {
  */
 typedef struct SDL_Surface
 {
-    Uint32 flags;               /**< Read-only */
+    SDL_SurfaceFlag flags;      /**< Read-only */
     SDL_PixelFormat *format;    /**< Read-only */
     int w, h;                   /**< Read-only */
     int pitch;                  /**< Read-only */

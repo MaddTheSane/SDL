@@ -39,9 +39,12 @@ extern "C" {
  * Header file for the shaped window API.
  */
 
-#define SDL_NONSHAPEABLE_WINDOW -1
-#define SDL_INVALID_SHAPE_ARGUMENT -2
-#define SDL_WINDOW_LACKS_SHAPE -3
+SDL_ENUM(int)
+{
+    SDL_NONSHAPEABLE_WINDOW = -1,
+    SDL_INVALID_SHAPE_ARGUMENT = -2,
+    SDL_WINDOW_LACKS_SHAPE = -3
+};
 
 /**
  *  \brief Create a window that can be shaped with the specified position, dimensions, and flags.
@@ -63,7 +66,7 @@ extern "C" {
  *
  *  \sa SDL_DestroyWindow()
  */
-extern DECLSPEC SDL_Window * SDLCALL SDL_CreateShapedWindow(const char *title,unsigned int x,unsigned int y,unsigned int w,unsigned int h,Uint32 flags);
+extern DECLSPEC SDL_Window * SDLCALL SDL_CreateShapedWindow(const char *title,unsigned int x,unsigned int y,unsigned int w,unsigned int h,SDL_WindowFlags flags);
 
 /**
  * \brief Return whether the given window is a shaped window.

@@ -46,7 +46,8 @@ extern "C" {
 #endif
 
 /* General keyboard/mouse state definitions */
-typedef SDL_ENUM(Uint8, SDL_EventStateGeneric) {
+typedef SDL_ENUM(Uint8, SDL_EventStateGeneric)
+{
     SDL_RELEASED = 0,
     SDL_PRESSED = 1
 };
@@ -316,7 +317,7 @@ typedef struct SDL_JoyHatEvent
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     SDL_JoystickID which; /**< The joystick instance id */
     Uint8 hat;          /**< The joystick hat index */
-    Uint8 value;        /**< The hat position value.
+    SDL_HatPosition value; /**< The hat position value.
                          *   \sa ::SDL_HAT_LEFTUP ::SDL_HAT_UP ::SDL_HAT_RIGHTUP
                          *   \sa ::SDL_HAT_LEFT ::SDL_HAT_CENTERED ::SDL_HAT_RIGHT
                          *   \sa ::SDL_HAT_LEFTDOWN ::SDL_HAT_DOWN ::SDL_HAT_RIGHTDOWN

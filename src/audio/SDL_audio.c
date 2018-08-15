@@ -1161,7 +1161,7 @@ prepare_audiospec(const SDL_AudioSpec * orig, SDL_AudioSpec * prepared)
 static SDL_AudioDeviceID
 open_audio_device(const char *devname, int iscapture,
                   const SDL_AudioSpec * desired, SDL_AudioSpec * obtained,
-                  int allowed_changes, int min_id)
+                  SDL_AudioAllowedChanges allowed_changes, int min_id)
 {
     const SDL_bool is_internal_thread = (desired->callback == NULL);
     SDL_AudioDeviceID id = 0;
@@ -1445,7 +1445,7 @@ SDL_OpenAudio(SDL_AudioSpec * desired, SDL_AudioSpec * obtained)
 SDL_AudioDeviceID
 SDL_OpenAudioDevice(const char *device, int iscapture,
                     const SDL_AudioSpec * desired, SDL_AudioSpec * obtained,
-                    int allowed_changes)
+                    SDL_AudioAllowedChanges allowed_changes)
 {
     return open_audio_device(device, iscapture, desired, obtained,
                              allowed_changes, 2);

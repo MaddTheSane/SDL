@@ -313,7 +313,8 @@ extern DECLSPEC SDL_bool SDLCALL SDL_JoystickGetAxisInitialState(SDL_Joystick * 
  *  \name Hat positions
  */
 /* @{ */
-typedef SDL_OPTIONS(Uint8, SDL_HatPosition) {
+typedef SDL_OPTIONS(Uint8, SDL_HatPosition)
+{
     SDL_HAT_CENTERED    = 0x00,
     SDL_HAT_UP          = 0x01,
     SDL_HAT_RIGHT       = 0x02,
