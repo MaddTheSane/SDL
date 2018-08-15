@@ -385,6 +385,8 @@
 		4D16645A1EDD6235003DE88E /* SDL_cocoametalview.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1664501EDD60AD003DE88E /* SDL_cocoametalview.m */; };
 		4D16645B1EDD6235003DE88E /* SDL_cocoavulkan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1664521EDD60AD003DE88E /* SDL_cocoavulkan.m */; };
 		4D7517291EE2562B00820EEA /* SDL_cocoametalview.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D7517281EE2562B00820EEA /* SDL_cocoametalview.h */; };
+		5531EEDA2124C7120017D71F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5531EED92124C7120017D71F /* libiconv.tbd */; };
+		5531EEDB2124C72C0017D71F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5531EED92124C7120017D71F /* libiconv.tbd */; };
 		56115BBB1DF72C6D00F47E1E /* SDL_dataqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 56115BB91DF72C6D00F47E1E /* SDL_dataqueue.c */; };
 		56115BBC1DF72C6D00F47E1E /* SDL_dataqueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 56115BBA1DF72C6D00F47E1E /* SDL_dataqueue.h */; };
 		562C4AE91D8F496200AF9EBE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7381E931D8B69C300B177DD /* AudioToolbox.framework */; };
@@ -1107,6 +1109,7 @@
 		4D1664521EDD60AD003DE88E /* SDL_cocoavulkan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_cocoavulkan.m; sourceTree = "<group>"; };
 		4D4820431F0F10B400EDC31C /* SDL_vulkan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_vulkan.h; sourceTree = "<group>"; };
 		4D7517281EE2562B00820EEA /* SDL_cocoametalview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_cocoametalview.h; sourceTree = "<group>"; };
+		5531EED92124C7120017D71F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		55CAC8F31C5FE25A00A75ABD /* SDL2.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = SDL2.modulemap; sourceTree = "<group>"; };
 		56115BB91DF72C6D00F47E1E /* SDL_dataqueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_dataqueue.c; sourceTree = "<group>"; };
 		56115BBA1DF72C6D00F47E1E /* SDL_dataqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_dataqueue.h; sourceTree = "<group>"; };
@@ -1234,6 +1237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5531EEDA2124C7120017D71F /* libiconv.tbd in Frameworks */,
 				564624381FF821DA0074AC87 /* Metal.framework in Frameworks */,
 				564624361FF821C20074AC87 /* QuartzCore.framework in Frameworks */,
 				A7381E971D8B6A0300B177DD /* AudioToolbox.framework in Frameworks */,
@@ -1268,6 +1272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5531EEDB2124C72C0017D71F /* libiconv.tbd in Frameworks */,
 				5646243C1FF822170074AC87 /* Metal.framework in Frameworks */,
 				5646243B1FF822100074AC87 /* QuartzCore.framework in Frameworks */,
 				56C5237F1D8F4985001F2F30 /* CoreAudio.framework in Frameworks */,
@@ -1842,6 +1847,7 @@
 		564624341FF821B70074AC87 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5531EED92124C7120017D71F /* libiconv.tbd */,
 				564624371FF821CB0074AC87 /* Metal.framework */,
 				564624351FF821B80074AC87 /* QuartzCore.framework */,
 				A7381E931D8B69C300B177DD /* AudioToolbox.framework */,
@@ -2526,7 +2532,6 @@
 				DB313F7317554B71006C0E22 /* Headers */,
 				DB313FFD17554B71006C0E22 /* Sources */,
 				DB31406B17554B71006C0E22 /* Frameworks */,
-				DB31407317554B71006C0E22 /* Rez */,
 			);
 			buildRules = (
 			);
@@ -2582,13 +2587,6 @@
 
 /* Begin PBXRezBuildPhase section */
 		BECDF6B20761BA81005FE872 /* Rez */ = {
-			isa = PBXRezBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DB31407317554B71006C0E22 /* Rez */ = {
 			isa = PBXRezBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3091,7 +3089,6 @@
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				INFOPLIST_FILE = "Info-Framework.plist";
 				MODULEMAP_FILE = "pkg-support/resources/SDL2.modulemap";
-				OTHER_LDFLAGS = "-liconv";
 				PRODUCT_BUNDLE_IDENTIFIER = org.libsdl.SDL2;
 				PRODUCT_NAME = SDL2;
 				PROVISIONING_PROFILE = "";
@@ -3189,7 +3186,6 @@
 				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				INFOPLIST_FILE = "Info-Framework.plist";
 				MODULEMAP_FILE = "pkg-support/resources/SDL2.modulemap";
-				OTHER_LDFLAGS = "-liconv";
 				PRODUCT_BUNDLE_IDENTIFIER = org.libsdl.SDL2;
 				PRODUCT_NAME = SDL2;
 				PROVISIONING_PROFILE = "";
