@@ -215,6 +215,8 @@ static jmethodID midSetOrientation;
 static jmethodID midGetContext;
 static jmethodID midIsAndroidTV;
 static jmethodID midIsChromebook;
+static jmethodID midIsDeXMode;
+static jmethodID midManualBackButton;
 static jmethodID midInputGetInputDeviceIds;
 static jmethodID midSendMessage;
 static jmethodID midShowTextInput;
@@ -320,6 +322,10 @@ JNIEXPORT void JNICALL SDL_JAVA_INTERFACE(nativeSetupJNI)(JNIEnv* mEnv, jclass c
                                 "isAndroidTV","()Z");
     midIsChromebook = (*mEnv)->GetStaticMethodID(mEnv, mActivityClass,
                                 "isChromebook", "()Z");
+    midIsDeXMode = (*mEnv)->GetStaticMethodID(mEnv, mActivityClass,
+                                "isDeXMode", "()Z");
+    midManualBackButton = (*mEnv)->GetStaticMethodID(mEnv, mActivityClass,
+                                "manualBackButton", "()V");
     midInputGetInputDeviceIds = (*mEnv)->GetStaticMethodID(mEnv, mActivityClass,
                                 "inputGetInputDeviceIds", "(I)[I");
     midSendMessage = (*mEnv)->GetStaticMethodID(mEnv, mActivityClass,
@@ -354,7 +360,7 @@ JNIEXPORT void JNICALL SDL_JAVA_INTERFACE(nativeSetupJNI)(JNIEnv* mEnv, jclass c
        !midClipboardSetText || !midClipboardGetText || !midClipboardHasText ||
        !midOpenAPKExpansionInputStream || !midGetManifestEnvironmentVariables || !midGetDisplayDPI ||
        !midCreateCustomCursor || !midSetCustomCursor || !midSetSystemCursor || !midSupportsRelativeMouse || !midSetRelativeMouseEnabled ||
-       !midIsChromebook) {
+       !midIsChromebook || !midIsDeXMode || !midManualBackButton) {
         __android_log_print(ANDROID_LOG_WARN, "SDL", "Missing some Java callbacks, do you have the latest version of SDLActivity.java?");
     }
 
@@ -2034,6 +2040,18 @@ SDL_bool SDL_IsChromebook(void)
 {
     JNIEnv *env = Android_JNI_GetEnv();
     return (*env)->CallStaticBooleanMethod(env, mActivityClass, midIsChromebook);
+}
+
+SDL_bool SDL_IsDeXMode(void)
+{
+    JNIEnv *env = Android_JNI_GetEnv();
+    return (*env)->CallStaticBooleanMethod(env, mActivityClass, midIsDeXMode);
+}
+
+void SDL_AndroidBackButton(void)
+{
+    JNIEnv *env = Android_JNI_GetEnv();
+    return (*env)->CallStaticVoidMethod(env, mActivityClass, midManualBackButton);
 }
 
 const char * SDL_AndroidGetInternalStoragePath(void)

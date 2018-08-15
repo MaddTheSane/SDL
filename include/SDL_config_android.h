@@ -98,6 +98,8 @@
 #define HAVE_COPYSIGNF  1
 #define HAVE_COS    1
 #define HAVE_COSF   1
+#define HAVE_EXP    1
+#define HAVE_EXPF   1
 #define HAVE_FABS   1
 #define HAVE_FABSF  1
 #define HAVE_FLOOR  1
@@ -132,6 +134,7 @@
 
 /* Enable various input drivers */
 #define SDL_JOYSTICK_ANDROID    1
+#define SDL_JOYSTICK_HIDAPI    1
 #define SDL_HAPTIC_ANDROID    1
 
 /* Enable various shared object loading systems */

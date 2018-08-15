@@ -219,8 +219,6 @@ SetupWindowData(_THIS, SDL_Window * window, HWND hwnd, HWND parent, SDL_bool cre
             if ((window->windowed.w && window->windowed.w != w) || (window->windowed.h && window->windowed.h != h)) {
                 /* We tried to create a window larger than the desktop and Windows didn't allow it.  Override! */
                 int x, y;
-                int w, h;
-
                 /* Figure out what the window area will be */
                 WIN_AdjustWindowRect(window, &x, &y, &w, &h, SDL_FALSE);
                 SetWindowPos(hwnd, HWND_NOTOPMOST, x, y, w, h, SWP_NOCOPYBITS | SWP_NOZORDER | SWP_NOACTIVATE);
@@ -290,9 +288,6 @@ SetupWindowData(_THIS, SDL_Window * window, HWND hwnd, HWND parent, SDL_bool cre
     if (videodata->RegisterTouchWindow) {
         videodata->RegisterTouchWindow(hwnd, (TWF_FINETOUCH|TWF_WANTPALM));
     }
-
-    /* Enable dropping files */
-    DragAcceptFiles(hwnd, TRUE);
 
     data->initializing = SDL_FALSE;
 
@@ -979,6 +974,13 @@ WIN_SetWindowOpacity(_THIS, SDL_Window * window, float opacity)
     }
 
     return 0;
+}
+
+void
+WIN_AcceptDragAndDrop(SDL_Window * window, SDL_bool accept)
+{
+    const SDL_WindowData *data = (SDL_WindowData *) window->driverdata;
+    DragAcceptFiles(data->hwnd, accept ? TRUE : FALSE);
 }
 
 #endif /* SDL_VIDEO_DRIVER_WINDOWS */

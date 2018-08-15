@@ -33,7 +33,7 @@ import android.content.pm.ApplicationInfo;
 /**
     SDL Activity
 */
-public class SDLActivity extends Activity {
+public class SDLActivity extends Activity implements View.OnSystemUiVisibilityChangeListener {
     private static final String TAG = "SDL";
 
     public static boolean mIsResumedCalled, mIsSurfaceReady, mHasFocus;
@@ -80,7 +80,7 @@ public class SDLActivity extends Activity {
     protected static Hashtable<Integer, Object> mCursors;
     protected static int mLastCursorID;
     protected static SDLGenericMotionListener_API12 mMotionListener;
-
+    protected static HIDDeviceManager mHIDDeviceManager;
 
     // This is what SDL runs in. It invokes SDL_main(), eventually
     protected static Thread mSDLThread;
@@ -241,6 +241,8 @@ public class SDLActivity extends Activity {
             mClipboardHandler = new SDLClipboardHandler_Old();
         }
 
+        mHIDDeviceManager = new HIDDeviceManager(this);
+
         // Set up the surface
         mSurface = new SDLSurface(getApplication());
 
@@ -250,6 +252,8 @@ public class SDLActivity extends Activity {
         setContentView(mLayout);
 
         setWindowStyle(false);
+
+        getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(this);
 
         // Get filename from "Open with" of another application
         Intent intent = getIntent();
@@ -274,6 +278,10 @@ public class SDLActivity extends Activity {
            return;
         }
 
+        if (mHIDDeviceManager != null) {
+            mHIDDeviceManager.setFrozen(true);
+        }
+
         SDLActivity.handleNativeState();
     }
 
@@ -286,6 +294,10 @@ public class SDLActivity extends Activity {
 
         if (SDLActivity.mBrokenLibraries) {
            return;
+        }
+
+        if (mHIDDeviceManager != null) {
+            mHIDDeviceManager.setFrozen(false);
         }
 
         SDLActivity.handleNativeState();
@@ -328,6 +340,11 @@ public class SDLActivity extends Activity {
     protected void onDestroy() {
         Log.v(TAG, "onDestroy()");
 
+        if (mHIDDeviceManager != null) {
+            mHIDDeviceManager.close();
+            mHIDDeviceManager = null;
+        }
+
         if (SDLActivity.mBrokenLibraries) {
            super.onDestroy();
            // Reset everything in case the user re opens the app
@@ -358,6 +375,43 @@ public class SDLActivity extends Activity {
 
         // Reset everything in case the user re opens the app
         SDLActivity.initialize();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Check if we want to block the back button in case of mouse right click.
+        //
+        // If we do, the normal hardware back button will no longer work and people have to use home,
+        // but the mouse right click will work.
+        //
+        String trapBack = SDLActivity.nativeGetHint("SDL_ANDROID_TRAP_BACK_BUTTON");
+        if ((trapBack != null) && trapBack.equals("1")) {
+            // Exit and let the mouse handler handle this button (if appropriate)
+            return;
+        }
+
+        // Default system back button behavior.
+        super.onBackPressed();
+    }
+
+    // Called by JNI from SDL.
+    public static void manualBackButton() {
+        mSingleton.pressBackButton();
+    }
+
+    // Used to get us onto the activity's main thread
+    public void pressBackButton() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                SDLActivity.this.superOnBackPressed();
+            }
+        });
+    }
+
+    // Used to access the system back behavior.
+    public void superOnBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
@@ -427,10 +481,7 @@ public class SDLActivity extends Activity {
     /* The native thread has finished */
     public static void handleNativeExit() {
         SDLActivity.mSDLThread = null;
-
-        // Make sure we currently have a singleton before we try to call it.
-        if (mSingleton != null)
-            mSingleton.finish();
+        mSingleton.finish();
     }
 
 
@@ -441,6 +492,8 @@ public class SDLActivity extends Activity {
     static final int COMMAND_SET_KEEP_SCREEN_ON = 5;
 
     protected static final int COMMAND_USER = 0x8000;
+
+    protected static boolean mFullscreenModeActive;
 
     /**
      * This method is called by SDL if SDL did not handle a message itself.
@@ -480,30 +533,31 @@ public class SDLActivity extends Activity {
                     // This version of Android doesn't support the immersive fullscreen mode
                     break;
                 }
-/* This needs more testing, per bug 4096 - Enabling fullscreen on Android causes the app to toggle fullscreen mode continuously in a loop
- ***
                 if (context instanceof Activity) {
                     Window window = ((Activity) context).getWindow();
                     if (window != null) {
                         if ((msg.obj instanceof Integer) && (((Integer) msg.obj).intValue() != 0)) {
-                            int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                            int flags = View.SYSTEM_UI_FLAG_FULLSCREEN |
                                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                                        View.SYSTEM_UI_FLAG_FULLSCREEN |
-                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                    					View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.INVISIBLE;
                             window.getDecorView().setSystemUiVisibility(flags);        
                             window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                            SDLActivity.mFullscreenModeActive = true;
                         } else {
-                            int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-                            window.getDecorView().setSystemUiVisibility(flags);        
+                            int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_VISIBLE;
+                            window.getDecorView().setSystemUiVisibility(flags);
+                            window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
                             window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                            SDLActivity.mFullscreenModeActive = false;
                         }
                     }
                 } else {
                     Log.e(TAG, "error handling message, getContext() returned no Activity");
                 }
-***/
                 break;
             case COMMAND_TEXTEDIT_HIDE:
                 if (mTextEdit != null) {
@@ -665,6 +719,17 @@ public class SDLActivity extends Activity {
      */
     public static boolean supportsRelativeMouse()
     {
+        // ChromeOS doesn't provide relative mouse motion via the Android 7 APIs
+        if (isChromebook()) {
+            return false;
+        }
+
+        // Samsung DeX mode doesn't support relative mice properly under Android 7 APIs,
+        // and simply returns no data under Android 8 APIs.
+        if (isDeXMode()) {
+            return false;
+        }
+
         return SDLActivity.getMotionListener().supportsRelativeMouse();
     }
 
@@ -673,6 +738,10 @@ public class SDLActivity extends Activity {
      */
     public static boolean setRelativeMouseEnabled(boolean enabled)
     {
+        if (enabled && !supportsRelativeMouse()) {
+            return false;
+        }
+
         return SDLActivity.getMotionListener().setRelativeMouseEnabled(enabled);
     }
 
@@ -698,7 +767,13 @@ public class SDLActivity extends Activity {
      */
     public static boolean isAndroidTV() {
         UiModeManager uiModeManager = (UiModeManager) getContext().getSystemService(UI_MODE_SERVICE);
-        return (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION);
+        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+            return true;
+        }
+        if (Build.MANUFACTURER.equals("MINIX") && Build.MODEL.equals("NEO-U1")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -707,6 +782,23 @@ public class SDLActivity extends Activity {
     public static boolean isChromebook() {
         return getContext().getPackageManager().hasSystemFeature("org.chromium.arc.device_management");
     }    
+
+    /**
+     * This method is called by SDL using JNI.
+     */
+    public static boolean isDeXMode() {
+        if (Build.VERSION.SDK_INT < 24) {
+            return false;
+        }
+        try {
+            final Configuration config = getContext().getResources().getConfiguration();
+            final Class configClass = config.getClass();
+            return configClass.getField("SEM_DESKTOP_MODE_ENABLED").getInt(configClass)
+                    == configClass.getField("semDesktopModeEnabled").getInt(config);
+        } catch(Exception ignored) {
+            return false;
+        }
+    }
 
     /**
      * This method is called by SDL using JNI.
@@ -1113,6 +1205,32 @@ public class SDLActivity extends Activity {
         return dialog;
     }
 
+    private final Runnable rehideSystemUi = new Runnable() {
+        @Override
+        public void run() {
+            int flags = View.SYSTEM_UI_FLAG_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.INVISIBLE;
+
+            SDLActivity.this.getWindow().getDecorView().setSystemUiVisibility(flags);
+        }
+    };
+
+    public void onSystemUiVisibilityChange(int visibility) {
+        if (SDLActivity.mFullscreenModeActive && (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0 || (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) {
+
+            Handler handler = getWindow().getDecorView().getHandler();
+            if (handler != null) {
+                handler.removeCallbacks(rehideSystemUi); // Prevent a hide loop.
+                handler.postDelayed(rehideSystemUi, 2000);
+            }
+
+        }
+    }    
+
     /**
      * This method is called by SDL using JNI.
      */
@@ -1280,10 +1398,6 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
         if (Build.VERSION.SDK_INT >= 12) {
             setOnGenericMotionListener(SDLActivity.getMotionListener());
-        }
-
-        if (Build.VERSION.SDK_INT >= 26) {
-            setOnCapturedPointerListener(new SDLCapturedPointerListener_API26());
         }
 
         // Some arbitrary defaults to avoid a potential division by zero
@@ -1513,7 +1627,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         float x,y,p;
 
         // !!! FIXME: dump this SDK check after 2.0.4 ships and require API14.
-        if (event.getSource() == InputDevice.SOURCE_MOUSE && SDLActivity.mSeparateMouseAndTouch) {
+        // 12290 = Samsung DeX mode desktop mouse
+        if ((event.getSource() == InputDevice.SOURCE_MOUSE || event.getSource() == 12290) && SDLActivity.mSeparateMouseAndTouch) {
             if (Build.VERSION.SDK_INT < 14) {
                 mouseButton = 1; // all mouse buttons are the left button
             } else {
@@ -1639,6 +1754,49 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                                       event.values[2] / SensorManager.GRAVITY_EARTH);
         }
     }
+
+    // Captured pointer events for API 26.
+    public boolean onCapturedPointerEvent(MotionEvent event)
+    {
+        int action = event.getActionMasked();
+
+        float x, y;
+        switch (action) {
+            case MotionEvent.ACTION_SCROLL:
+                x = event.getAxisValue(MotionEvent.AXIS_HSCROLL, 0);
+                y = event.getAxisValue(MotionEvent.AXIS_VSCROLL, 0);
+                SDLActivity.onNativeMouse(0, action, x, y, false);
+                return true;
+
+            case MotionEvent.ACTION_HOVER_MOVE:
+            case MotionEvent.ACTION_MOVE:
+                x = event.getX(0);
+                y = event.getY(0);
+                SDLActivity.onNativeMouse(0, action, x, y, true);
+                return true;
+
+            case MotionEvent.ACTION_BUTTON_PRESS:
+            case MotionEvent.ACTION_BUTTON_RELEASE:
+
+                // Change our action value to what SDL's code expects.
+                if (action == MotionEvent.ACTION_BUTTON_PRESS) {
+                    action = MotionEvent.ACTION_DOWN;
+                }
+                else if (action == MotionEvent.ACTION_BUTTON_RELEASE) {
+                    action = MotionEvent.ACTION_UP;
+                }
+
+                x = event.getX(0);
+                y = event.getY(0);
+                int button = event.getButtonState();
+
+                SDLActivity.onNativeMouse(button, action, x, y, true);
+                return true;
+        }
+
+        return false;
+    }
+
 }
 
 /* This is a fake invisible editor view that receives the input and defines the

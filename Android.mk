@@ -31,7 +31,7 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(LOCAL_PATH)/src/haptic/android/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/joystick/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/joystick/android/*.c) \
-	$(LOCAL_PATH)/src/joystick/steam/SDL_steamcontroller.c \
+	$(wildcard $(LOCAL_PATH)/src/joystick/hidapi/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/loadso/dlopen/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/power/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/power/android/*.c) \
@@ -48,10 +48,14 @@ LOCAL_SRC_FILES := \
 	$(wildcard $(LOCAL_PATH)/src/video/yuv2rgb/*.c) \
 	$(wildcard $(LOCAL_PATH)/src/test/*.c))
 
+LOCAL_SHARED_LIBRARIES := hidapi
+
 LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES
 LOCAL_LDLIBS := -ldl -lGLESv1_CM -lGLESv2 -llog -landroid
 
-cmd-strip := 
+ifeq ($(NDK_DEBUG),1)
+    cmd-strip :=
+endif
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -86,4 +90,19 @@ LOCAL_MODULE_FILENAME := libSDL2main
 
 include $(BUILD_STATIC_LIBRARY)
 
+###########################
+#
+# hidapi library
+#
+###########################
 
+include $(CLEAR_VARS)
+
+LOCAL_CPPFLAGS += -std=c++11
+
+LOCAL_SRC_FILES := $(LOCAL_PATH)/src/hidapi/android/hid.cpp
+
+LOCAL_MODULE := libhidapi
+LOCAL_LDLIBS := -llog
+
+include $(BUILD_SHARED_LIBRARY)
