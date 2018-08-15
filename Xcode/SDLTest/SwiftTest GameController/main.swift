@@ -8,8 +8,8 @@
 import Foundation
 import SDL2
 
-let SCREEN_WIDTH:Int32 =    512
-let SCREEN_HEIGHT:Int32 =   320
+var SCREEN_WIDTH: Int32 { return 512 }
+var SCREEN_HEIGHT: Int32 { return 320 }
 
 
 private struct ButtonPosition {
@@ -71,7 +71,7 @@ private func loadTexture(_ renderer: SDL_RendererPtr, file: UnsafePointer<Int8>,
 	/* Set transparent pixel as the pixel at (0,0) */
 	if transparent {
 		if temp.pointee.format.pointee.BytesPerPixel == 1 {
-			SDL_SetColorKey(temp, SDL_bool.TRUE.rawValue, Uint32(temp.pointee.pixels.assumingMemoryBound(to: Uint8.self).pointee));
+			SDL_SetColorKey(temp, 1, Uint32(temp.pointee.pixels.assumingMemoryBound(to: Uint8.self).pointee));
 		}
 	}
 	
@@ -190,16 +190,10 @@ private func watchGameController(_ gamecontroller: SDL_GameControllerPtr) -> Boo
 	
 	/* scale for platforms that don't give you the window size you asked for. */
 	SDL_RenderSetLogicalSize(screen, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-	guard let controllerURL = Bundle.main.url(forResource: "controllermap", withExtension: "bmp"),
-		let buttonURL = Bundle.main.url(forResource: "button", withExtension: "bmp"),
-		let axisURL = Bundle.main.url(forResource: "axis", withExtension: "bmp") else {
-			return false
-	}
 	
-	background = loadTexture(screen, fileURL: controllerURL, transparent: false)
-	button = loadTexture(screen, fileURL: buttonURL, transparent: true)
-	axis = loadTexture(screen, fileURL: axisURL, transparent: true)
+	background = loadTexture(screen, file: "controllermap.bmp", transparent: false)
+	button = loadTexture(screen, file: "button.bmp", transparent: true)
+	axis = loadTexture(screen, file: "axis.bmp", transparent: true)
 	
 	if background == nil || button == nil || axis == nil {
 		return false;
@@ -225,18 +219,18 @@ private func theMainFunc() -> Int32 {
 	var nController: Int32 = 0;
 	var guid = [Int8](repeating: 0, count: 64)
 	var gamecontroller: SDL_GameControllerPtr? = nil
+	let ourInitFlags: SDL_InitFlags = [.INIT_VIDEO, .INIT_JOYSTICK, .INIT_GAMECONTROLLER]
 
 	/* Initialize SDL (Note: video is required to start event loop) */
-	guard SDL_Init([.INIT_VIDEO, .INIT_JOYSTICK, .INIT_GAMECONTROLLER]) >= 0 else {
+	guard SDL_Init(ourInitFlags) >= 0 else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s\n", SDL_GetError());
 		return 1
 	}
 	defer {
-		SDL_QuitSubSystem([.INIT_VIDEO, .INIT_JOYSTICK, .INIT_GAMECONTROLLER])
+		SDL_QuitSubSystem(ourInitFlags)
 	}
 	
-	//SDL_GameControllerAddMappingsFromFile("/Users/cwbetts/renpy-6.99.14.3-sdk/renpy/common/gamecontrollerdb.txt");
-	SDL_GameControllerAddMappingsFromFile("/Users/cwbetts/Downloads/gamecontrollerdb.txt")
+	SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt")
 	
 	/* Print information about the mappings */
 	if CommandLine.arguments.count == 1 {
@@ -337,6 +331,7 @@ SDL_LogSetOutputFunction({ (_, category, priority, message) in
 		return
 	}
 	
+	let swiftMessage = String(cString: message)
 	let priorityName: String
 	switch priority {
 	case .LOG_PRIORITY_VERBOSE:
@@ -361,7 +356,7 @@ SDL_LogSetOutputFunction({ (_, category, priority, message) in
 		priorityName = "Unknown"
 	}
 	
-	print("[\(priorityName)] \(String(cString: message))")
+	print("[\(priorityName)] \(swiftMessage)")
 }, nil)
 
 let retCode = theMainFunc()

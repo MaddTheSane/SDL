@@ -55,7 +55,7 @@ static Uint8 SDL_SubsystemRefCount[ 32 ];
 
 /* Private helper to increment a subsystem's ref counter. */
 static void
-SDL_PrivateSubsystemRefCountIncr(Uint32 subsystem)
+SDL_PrivateSubsystemRefCountIncr(SDL_InitFlags subsystem)
 {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
     SDL_assert(SDL_SubsystemRefCount[subsystem_index] < 255);
@@ -64,7 +64,7 @@ SDL_PrivateSubsystemRefCountIncr(Uint32 subsystem)
 
 /* Private helper to decrement a subsystem's ref counter. */
 static void
-SDL_PrivateSubsystemRefCountDecr(Uint32 subsystem)
+SDL_PrivateSubsystemRefCountDecr(SDL_InitFlags subsystem)
 {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
     if (SDL_SubsystemRefCount[subsystem_index] > 0) {
@@ -74,7 +74,7 @@ SDL_PrivateSubsystemRefCountDecr(Uint32 subsystem)
 
 /* Private helper to check if a system needs init. */
 static SDL_bool
-SDL_PrivateShouldInitSubsystem(Uint32 subsystem)
+SDL_PrivateShouldInitSubsystem(SDL_InitFlags subsystem)
 {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
     SDL_assert(SDL_SubsystemRefCount[subsystem_index] < 255);
@@ -83,7 +83,7 @@ SDL_PrivateShouldInitSubsystem(Uint32 subsystem)
 
 /* Private helper to check if a system needs to be quit. */
 static SDL_bool
-SDL_PrivateShouldQuitSubsystem(Uint32 subsystem) {
+SDL_PrivateShouldQuitSubsystem(SDL_InitFlags subsystem) {
     int subsystem_index = SDL_MostSignificantBitIndex32(subsystem);
     if (SDL_SubsystemRefCount[subsystem_index] == 0) {
       return SDL_FALSE;
@@ -102,7 +102,7 @@ SDL_SetMainReady(void)
 }
 
 int
-SDL_InitSubSystem(Uint32 flags)
+SDL_InitSubSystem(SDL_InitFlags flags)
 {
     if (!SDL_MainIsReady) {
         SDL_SetError("Application didn't initialize properly, did you include SDL_main.h in the file containing your main() function?");
@@ -236,13 +236,13 @@ SDL_InitSubSystem(Uint32 flags)
 }
 
 int
-SDL_Init(Uint32 flags)
+SDL_Init(SDL_InitFlags flags)
 {
     return SDL_InitSubSystem(flags);
 }
 
 void
-SDL_QuitSubSystem(Uint32 flags)
+SDL_QuitSubSystem(SDL_InitFlags flags)
 {
     /* Shut down requested initialized subsystems */
 #if !SDL_JOYSTICK_DISABLED
@@ -318,7 +318,7 @@ SDL_QuitSubSystem(Uint32 flags)
 }
 
 Uint32
-SDL_WasInit(Uint32 flags)
+SDL_WasInit(SDL_InitFlags flags)
 {
     int i;
     int num_subsystems = SDL_arraysize(SDL_SubsystemRefCount);
