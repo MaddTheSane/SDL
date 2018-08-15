@@ -52,27 +52,27 @@ func osLogOutput(userData: UnsafeMutableRawPointer?, category: Int32, priority: 
 	let logType: OSLogType
 	let priorityName: String
 	switch priority {
-	case .LOG_PRIORITY_VERBOSE:
+	case .verbose:
 		logType = .info
 		priorityName = "Verbose"
 		
-	case .LOG_PRIORITY_DEBUG:
+	case .debug:
 		logType = .debug
 		priorityName = "Debug"
 		
-	case .LOG_PRIORITY_INFO:
+	case .info:
 		logType = .default
 		priorityName = "Info"
 		
-	case .LOG_PRIORITY_WARN:
+	case .warn:
 		logType = .error
 		priorityName = "Warn"
 		
-	case .LOG_PRIORITY_ERROR:
+	case .error:
 		logType = .error
 		priorityName = "Error"
 
-	case .LOG_PRIORITY_CRITICAL:
+	case .critical:
 		logType = .fault
 		priorityName = "Critical"
 
