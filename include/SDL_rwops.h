@@ -40,12 +40,12 @@ extern "C" {
 
 /* RWops Types */
 typedef SDL_ENUM(Uint32, SDL_RWopsType) {
-    SDL_RWOPS_UNKNOWN   = 0U,  /**< Unknown stream type */
-    SDL_RWOPS_WINFILE   = 1U,  /**< Win32 file */
-    SDL_RWOPS_STDFILE   = 2U,  /**< Stdio file */
-    SDL_RWOPS_JNIFILE   = 3U,  /**< Android asset */
-    SDL_RWOPS_MEMORY    = 4U,  /**< Memory stream */
-    SDL_RWOPS_MEMORY_RO = 5U   /**< Read-Only memory stream */
+    SDL_RWOPS_UNKNOWN SDL_SWIFT_NAME(unknown)   = 0U,  /**< Unknown stream type */
+    SDL_RWOPS_WINFILE SDL_SWIFT_NAME(winFile)   = 1U,  /**< Win32 file */
+    SDL_RWOPS_STDFILE SDL_SWIFT_NAME(stdFile)   = 2U,  /**< Stdio file */
+    SDL_RWOPS_JNIFILE SDL_SWIFT_NAME(jniFile)   = 3U,  /**< Android asset */
+    SDL_RWOPS_MEMORY SDL_SWIFT_NAME(memory)     = 4U,  /**< Memory stream */
+    SDL_RWOPS_MEMORY_RO SDL_SWIFT_NAME(memoryRO)= 5U   /**< Read-Only memory stream */
 };
 
 /**

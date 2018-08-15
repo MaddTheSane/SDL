@@ -578,9 +578,9 @@ extern DECLSPEC void SDLCALL SDL_PumpEvents(void);
 /* @{ */
 typedef SDL_ENUM(char, SDL_eventaction)
 {
-    SDL_ADDEVENT,
-    SDL_PEEKEVENT,
-    SDL_GETEVENT
+    SDL_ADDEVENT SDL_SWIFT_NAME(add),
+    SDL_PEEKEVENT SDL_SWIFT_NAME(peek),
+    SDL_GETEVENT SDL_SWIFT_NAME(get)
 };
 
 /**

@@ -108,7 +108,7 @@ func loop(_ gamecontroller: SDL_GameControllerPtr) {
 			SDL_Log("Controller button %s %s\n", SDL_GameControllerGetStringForButton(event.cbutton.button), event.cbutton.state == .PRESSED ? "pressed" : "released");
 			/* First button triggers a 0.5 second full strength rumble */
 			if (event.type == .CONTROLLERBUTTONDOWN &&
-				event.cbutton.button == .CONTROLLER_BUTTON_A) {
+				event.cbutton.button == .a) {
 				SDL_GameControllerRumble(gamecontroller, 0xFFFF, 0xFFFF, 500);
 			}
 
@@ -166,7 +166,7 @@ private func watchGameController(_ gamecontroller: SDL_GameControllerPtr) -> Boo
 		basetitle += String(cString: name)
 	}
 	
-	guard let window: SDL_WindowPtr = SDL_CreateWindow(basetitle, Int32(SDL_WINDOWPOS_CENTERED), Int32(SDL_WINDOWPOS_CENTERED), SCREEN_WIDTH, SCREEN_HEIGHT, [.WINDOW_ALLOW_HIGHDPI]) else {
+	guard let window: SDL_WindowPtr = SDL_CreateWindow(basetitle, Int32(SDL_WINDOWPOS_CENTERED), Int32(SDL_WINDOWPOS_CENTERED), SCREEN_WIDTH, SCREEN_HEIGHT, [.allowHighDPI]) else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create window: %s\n", SDL_GetError());
 		return false
 	}
@@ -174,7 +174,7 @@ private func watchGameController(_ gamecontroller: SDL_GameControllerPtr) -> Boo
 		SDL_DestroyWindow(window)
 	}
 	
-	screen = SDL_CreateRenderer(window, -1, [.RENDERER_ACCELERATED])
+	screen = SDL_CreateRenderer(window, -1, [.accelerated])
 	guard let screen = screen else {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create renderer: %s\n", SDL_GetError());
 		return false
@@ -213,13 +213,13 @@ private func watchGameController(_ gamecontroller: SDL_GameControllerPtr) -> Boo
 }
 
 private func theMainFunc() -> Int32 {
-	SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_INFO)
+	SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, .info)
 	
 	var retcode: Int32 = 0
 	var nController: Int32 = 0;
 	var guid = [Int8](repeating: 0, count: 64)
 	var gamecontroller: SDL_GameControllerPtr? = nil
-	let ourInitFlags: SDL_InitFlags = [.INIT_VIDEO, .INIT_JOYSTICK, .INIT_GAMECONTROLLER]
+	let ourInitFlags: SDL_InitFlags = [.video, .joystick, .gameController]
 
 	/* Initialize SDL (Note: video is required to start event loop) */
 	guard SDL_Init(ourInitFlags) >= 0 else {
@@ -334,22 +334,22 @@ SDL_LogSetOutputFunction({ (_, category, priority, message) in
 	let swiftMessage = String(cString: message)
 	let priorityName: String
 	switch priority {
-	case .LOG_PRIORITY_VERBOSE:
+	case .verbose:
 		priorityName = "Verbose"
 		
-	case .LOG_PRIORITY_DEBUG:
+	case .debug:
 		priorityName = "Debug"
 		
-	case .LOG_PRIORITY_INFO:
+	case .info:
 		priorityName = "Info"
 		
-	case .LOG_PRIORITY_WARN:
+	case .warn:
 		priorityName = "Warn"
 		
-	case .LOG_PRIORITY_ERROR:
+	case .error:
 		priorityName = "Error"
 		
-	case .LOG_PRIORITY_CRITICAL:
+	case .critical:
 		priorityName = "Critical"
 		
 	default:

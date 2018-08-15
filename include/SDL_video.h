@@ -97,29 +97,29 @@ typedef struct SDL_Window SDL_Window;
 typedef SDL_OPTIONS(Uint32, SDL_WindowFlags)
 {
     /* !!! FIXME: change this to name = (1<<x). */
-    SDL_WINDOW_FULLSCREEN = 0x00000001,         /**< fullscreen window */
-    SDL_WINDOW_OPENGL = 0x00000002,             /**< window usable with OpenGL context */
-    SDL_WINDOW_SHOWN = 0x00000004,              /**< window is visible */
-    SDL_WINDOW_HIDDEN = 0x00000008,             /**< window is not visible */
-    SDL_WINDOW_BORDERLESS = 0x00000010,         /**< no window decoration */
-    SDL_WINDOW_RESIZABLE = 0x00000020,          /**< window can be resized */
-    SDL_WINDOW_MINIMIZED = 0x00000040,          /**< window is minimized */
-    SDL_WINDOW_MAXIMIZED = 0x00000080,          /**< window is maximized */
-    SDL_WINDOW_INPUT_GRABBED = 0x00000100,      /**< window has grabbed input focus */
-    SDL_WINDOW_INPUT_FOCUS = 0x00000200,        /**< window has input focus */
-    SDL_WINDOW_MOUSE_FOCUS = 0x00000400,        /**< window has mouse focus */
-    SDL_WINDOW_FULLSCREEN_DESKTOP = ( SDL_WINDOW_FULLSCREEN | 0x00001000 ),
-    SDL_WINDOW_FOREIGN = 0x00000800,            /**< window not created by SDL */
-    SDL_WINDOW_ALLOW_HIGHDPI = 0x00002000,      /**< window should be created in high-DPI mode if supported.
+    SDL_WINDOW_FULLSCREEN SDL_SWIFT_NAME(fullscreen) = 0x00000001,    /**< fullscreen window */
+    SDL_WINDOW_OPENGL SDL_SWIFT_NAME(openGL) = 0x00000002,            /**< window usable with OpenGL context */
+    SDL_WINDOW_SHOWN SDL_SWIFT_NAME(shown) = 0x00000004,              /**< window is visible */
+    SDL_WINDOW_HIDDEN SDL_SWIFT_NAME(hidden) = 0x00000008,            /**< window is not visible */
+    SDL_WINDOW_BORDERLESS SDL_SWIFT_NAME(borderless) = 0x00000010,    /**< no window decoration */
+    SDL_WINDOW_RESIZABLE SDL_SWIFT_NAME(resizable) = 0x00000020,      /**< window can be resized */
+    SDL_WINDOW_MINIMIZED SDL_SWIFT_NAME(minimized) = 0x00000040,      /**< window is minimized */
+    SDL_WINDOW_MAXIMIZED SDL_SWIFT_NAME(maximized) = 0x00000080,      /**< window is maximized */
+    SDL_WINDOW_INPUT_GRABBED SDL_SWIFT_NAME(inputGrabbed) = 0x00000100,/**< window has grabbed input focus */
+    SDL_WINDOW_INPUT_FOCUS SDL_SWIFT_NAME(inputFocus) = 0x00000200,   /**< window has input focus */
+    SDL_WINDOW_MOUSE_FOCUS SDL_SWIFT_NAME(mouseFocus) = 0x00000400,   /**< window has mouse focus */
+    SDL_WINDOW_FULLSCREEN_DESKTOP SDL_SWIFT_NAME(fullscreenDesktop) = ( SDL_WINDOW_FULLSCREEN | 0x00001000 ),
+    SDL_WINDOW_FOREIGN SDL_SWIFT_NAME(foreign) = 0x00000800,          /**< window not created by SDL */
+    SDL_WINDOW_ALLOW_HIGHDPI SDL_SWIFT_NAME(allowHighDPI) = 0x00002000, /**< window should be created in high-DPI mode if supported.
                                                      On macOS NSHighResolutionCapable must be set true in the
                                                      application's Info.plist for this to have any effect. */
-    SDL_WINDOW_MOUSE_CAPTURE = 0x00004000,      /**< window has mouse captured (unrelated to INPUT_GRABBED) */
-    SDL_WINDOW_ALWAYS_ON_TOP = 0x00008000,      /**< window should always be above others */
-    SDL_WINDOW_SKIP_TASKBAR  = 0x00010000,      /**< window should not be added to the taskbar */
-    SDL_WINDOW_UTILITY       = 0x00020000,      /**< window should be treated as a utility window */
-    SDL_WINDOW_TOOLTIP       = 0x00040000,      /**< window should be treated as a tooltip */
-    SDL_WINDOW_POPUP_MENU    = 0x00080000,      /**< window should be treated as a popup menu */
-    SDL_WINDOW_VULKAN        = 0x10000000       /**< window usable for Vulkan surface */
+    SDL_WINDOW_MOUSE_CAPTURE SDL_SWIFT_NAME(mouseCapture) = 0x00004000,     /**< window has mouse captured (unrelated to INPUT_GRABBED) */
+    SDL_WINDOW_ALWAYS_ON_TOP SDL_SWIFT_NAME(alwaysOnTop) = 0x00008000,      /**< window should always be above others */
+    SDL_WINDOW_SKIP_TASKBAR  SDL_SWIFT_NAME(skipTaskbar) = 0x00010000,      /**< window should not be added to the taskbar */
+    SDL_WINDOW_UTILITY       SDL_SWIFT_NAME(utility) = 0x00020000,    /**< window should be treated as a utility window */
+    SDL_WINDOW_TOOLTIP       SDL_SWIFT_NAME(tooltip) = 0x00040000,    /**< window should be treated as a tooltip */
+    SDL_WINDOW_POPUP_MENU    SDL_SWIFT_NAME(popUpMenu) = 0x00080000,  /**< window should be treated as a popup menu */
+    SDL_WINDOW_VULKAN        SDL_SWIFT_NAME(vulkan) = 0x10000000      /**< window usable for Vulkan surface */
 };
 
 /**
@@ -145,28 +145,28 @@ typedef SDL_OPTIONS(Uint32, SDL_WindowFlags)
  */
 typedef SDL_ENUM(Uint8, SDL_WindowEventID)
 {
-    SDL_WINDOWEVENT_NONE,           /**< Never used */
-    SDL_WINDOWEVENT_SHOWN,          /**< Window has been shown */
-    SDL_WINDOWEVENT_HIDDEN,         /**< Window has been hidden */
-    SDL_WINDOWEVENT_EXPOSED,        /**< Window has been exposed and should be
-                                         redrawn */
-    SDL_WINDOWEVENT_MOVED,          /**< Window has been moved to data1, data2
-                                     */
-    SDL_WINDOWEVENT_RESIZED,        /**< Window has been resized to data1xdata2 */
-    SDL_WINDOWEVENT_SIZE_CHANGED,   /**< The window size has changed, either as
+    SDL_WINDOWEVENT_NONE SDL_SWIFT_NAME(none),       /**< Never used */
+    SDL_WINDOWEVENT_SHOWN SDL_SWIFT_NAME(shown),     /**< Window has been shown */
+    SDL_WINDOWEVENT_HIDDEN SDL_SWIFT_NAME(hidden),   /**< Window has been hidden */
+    SDL_WINDOWEVENT_EXPOSED SDL_SWIFT_NAME(exposed), /**< Window has been exposed and should be
+                                                      redrawn */
+    SDL_WINDOWEVENT_MOVED SDL_SWIFT_NAME(moved),     /**< Window has been moved to data1, data2
+                                                      */
+    SDL_WINDOWEVENT_RESIZED SDL_SWIFT_NAME(resized), /**< Window has been resized to data1xdata2 */
+    SDL_WINDOWEVENT_SIZE_CHANGED SDL_SWIFT_NAME(sizeChanged), /**< The window size has changed, either as
                                          a result of an API call or through the
                                          system or user changing the window size. */
-    SDL_WINDOWEVENT_MINIMIZED,      /**< Window has been minimized */
-    SDL_WINDOWEVENT_MAXIMIZED,      /**< Window has been maximized */
-    SDL_WINDOWEVENT_RESTORED,       /**< Window has been restored to normal size
+    SDL_WINDOWEVENT_MINIMIZED SDL_SWIFT_NAME(minimized), /**< Window has been minimized */
+    SDL_WINDOWEVENT_MAXIMIZED SDL_SWIFT_NAME(maximized), /**< Window has been maximized */
+    SDL_WINDOWEVENT_RESTORED SDL_SWIFT_NAME(restored),   /**< Window has been restored to normal size
                                          and position */
-    SDL_WINDOWEVENT_ENTER,          /**< Window has gained mouse focus */
-    SDL_WINDOWEVENT_LEAVE,          /**< Window has lost mouse focus */
-    SDL_WINDOWEVENT_FOCUS_GAINED,   /**< Window has gained keyboard focus */
-    SDL_WINDOWEVENT_FOCUS_LOST,     /**< Window has lost keyboard focus */
-    SDL_WINDOWEVENT_CLOSE,          /**< The window manager requests that the window be closed */
-    SDL_WINDOWEVENT_TAKE_FOCUS,     /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
-    SDL_WINDOWEVENT_HIT_TEST        /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
+    SDL_WINDOWEVENT_ENTER SDL_SWIFT_NAME(enter),     /**< Window has gained mouse focus */
+    SDL_WINDOWEVENT_LEAVE SDL_SWIFT_NAME(leave),     /**< Window has lost mouse focus */
+    SDL_WINDOWEVENT_FOCUS_GAINED SDL_SWIFT_NAME(focusGained), /**< Window has gained keyboard focus */
+    SDL_WINDOWEVENT_FOCUS_LOST SDL_SWIFT_NAME(focusLost), /**< Window has lost keyboard focus */
+    SDL_WINDOWEVENT_CLOSE SDL_SWIFT_NAME(close),     /**< The window manager requests that the window be closed */
+    SDL_WINDOWEVENT_TAKE_FOCUS SDL_SWIFT_NAME(takeFocus), /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
+    SDL_WINDOWEVENT_HIT_TEST SDL_SWIFT_NAME(hitTest) /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
 };
 
 /**

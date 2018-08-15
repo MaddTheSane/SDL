@@ -29,48 +29,48 @@ public var SDL_AUDIO_MASK_SIGNED: Int32 { get }
 func SDL_LogError(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(category, .LOG_PRIORITY_ERROR, outStr, blankVAList)
+	SDL_LogMessageV(category, .error, outStr, blankVAList)
 }
 
 func SDL_Log(_ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_INFO, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .info, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_VERBOSE`
 func SDL_LogVerbose(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_VERBOSE, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .verbose, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_DEBUG`
 func SDL_LogDebug(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_DEBUG, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .debug, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_INFO`
 func SDL_LogInfo(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_INFO, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .info, outStr, blankVAList)
 }
 
 /// Log a message with `SDL_LOG_PRIORITY_WARN`
 func SDL_LogWarn(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_WARN, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .warn, outStr, blankVAList)
 }
 
 /// Log a message with SDL_LOG_PRIORITY_CRITICAL
 func SDL_LogCritical(_ category: Int32, _ fmt: String, _ args: CVarArg...) {
 	let blankVAList = getVaList([])
 	let outStr = String(format: fmt, arguments: args)
-	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_CRITICAL, outStr, blankVAList)
+	SDL_LogMessageV(SDL_LOG_CATEGORY_APPLICATION, .critical, outStr, blankVAList)
 }
 
 // MARK: -
@@ -152,7 +152,7 @@ public typealias SDL_Colour = SDL_Color
 
 public func SDL_QuitRequested() -> Bool {
 	SDL_PumpEvents()
-	return SDL_PeepEvents(nil, 0, .PEEKEVENT, .QUIT, .QUIT) > 0
+	return SDL_PeepEvents(nil, 0, .peek, .QUIT, .QUIT) > 0
 }
 
 //MARK: rwops
@@ -186,7 +186,7 @@ public func SDL_RWclose(_ ctx: UnsafeMutablePointer<SDL_RWops>) -> Int32 {
 
 extension WindowShapeMode {
 	public var alpha: Bool {
-		return (self == .ShapeModeDefault || self == .ShapeModeBinarizeAlpha || self == .ShapeModeReverseBinarizeAlpha)
+		return (self == .default || self == .binarizeAlpha || self == .reverseBinarizeAlpha)
 	}
 }
 

@@ -150,7 +150,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticCondition
      */
-    SDL_HAPTIC_CONSTANT   = (1u<<0),
+    SDL_HAPTIC_CONSTANT SDL_SWIFT_NAME(constant) = (1u<<0),
     
     /**
      *  \brief Sine wave effect supported.
@@ -159,7 +159,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticPeriodic
      */
-    SDL_HAPTIC_SINE      = (1u<<1),
+    SDL_HAPTIC_SINE SDL_SWIFT_NAME(sine) = (1u<<1),
     
     /**
      *  \brief Left/Right effect supported.
@@ -170,7 +170,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      * \warning this value was SDL_HAPTIC_SQUARE right before 2.0.0 shipped. Sorry,
      *          we ran out of bits, and this is important for XInput devices.
      */
-    SDL_HAPTIC_LEFTRIGHT    = (1u<<2),
+    SDL_HAPTIC_LEFTRIGHT SDL_SWIFT_NAME(leftRight) = (1u<<2),
     
     /* !!! FIXME: put this back when we have more bits in 2.1 */
     /* #define SDL_HAPTIC_SQUARE     (1<<2) */
@@ -182,7 +182,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticPeriodic
      */
-    SDL_HAPTIC_TRIANGLE  = (1u<<3),
+    SDL_HAPTIC_TRIANGLE SDL_SWIFT_NAME(triangle) = (1u<<3),
     
     /**
      *  \brief Sawtoothup wave effect supported.
@@ -191,7 +191,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticPeriodic
      */
-    SDL_HAPTIC_SAWTOOTHUP = (1u<<4),
+    SDL_HAPTIC_SAWTOOTHUP SDL_SWIFT_NAME(sawtoothUp) = (1u<<4),
     
     /**
      *  \brief Sawtoothdown wave effect supported.
@@ -200,7 +200,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticPeriodic
      */
-    SDL_HAPTIC_SAWTOOTHDOWN = (1u<<5),
+    SDL_HAPTIC_SAWTOOTHDOWN SDL_SWIFT_NAME(sawtoothDown) = (1u<<5),
     
     /**
      *  \brief Ramp effect supported.
@@ -209,7 +209,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticRamp
      */
-    SDL_HAPTIC_RAMP      = (1u<<6),
+    SDL_HAPTIC_RAMP SDL_SWIFT_NAME(ramp) = (1u<<6),
     
     /**
      *  \brief Spring effect supported - uses axes position.
@@ -219,7 +219,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticCondition
      */
-    SDL_HAPTIC_SPRING    = (1u<<7),
+    SDL_HAPTIC_SPRING SDL_SWIFT_NAME(spring) = (1u<<7),
     
     /**
      *  \brief Damper effect supported - uses axes velocity.
@@ -229,7 +229,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticCondition
      */
-    SDL_HAPTIC_DAMPER    = (1u<<8),
+    SDL_HAPTIC_DAMPER SDL_SWIFT_NAME(damper) = (1u<<8),
     
     /**
      *  \brief Inertia effect supported - uses axes acceleration.
@@ -239,7 +239,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticCondition
      */
-    SDL_HAPTIC_INERTIA    = (1u<<9),
+    SDL_HAPTIC_INERTIA SDL_SWIFT_NAME(inertia) = (1u<<9),
     
     /**
      *  \brief Friction effect supported - uses axes movement.
@@ -249,14 +249,14 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticCondition
      */
-    SDL_HAPTIC_FRICTION  = (1u<<10),
+    SDL_HAPTIC_FRICTION SDL_SWIFT_NAME(friction) = (1u<<10),
     
     /**
      *  \brief Custom effect is supported.
      *
      *  User defined custom haptic effect.
      */
-    SDL_HAPTIC_CUSTOM    = (1u<<11),
+    SDL_HAPTIC_CUSTOM SDL_SWIFT_NAME(custom) = (1u<<11),
     
     /* @} *//* Haptic effects */
     
@@ -269,7 +269,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticSetGain
      */
-    SDL_HAPTIC_GAIN      = (1u<<12),
+    SDL_HAPTIC_GAIN SDL_SWIFT_NAME(gain) = (1u<<12),
     
     /**
      *  \brief Device can set autocenter.
@@ -278,7 +278,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticSetAutocenter
      */
-    SDL_HAPTIC_AUTOCENTER = (1u<<13),
+    SDL_HAPTIC_AUTOCENTER SDL_SWIFT_NAME(autocenter) = (1u<<13),
     
     /**
      *  \brief Device can be queried for effect status.
@@ -287,7 +287,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *
      *  \sa SDL_HapticGetEffectStatus
      */
-    SDL_HAPTIC_STATUS    = (1u<<14),
+    SDL_HAPTIC_STATUS SDL_SWIFT_NAME(status) = (1u<<14),
     
     /**
      *  \brief Device can be paused.
@@ -297,7 +297,7 @@ typedef SDL_OPTIONS(Uint16, SDL_HapticEffectType) {
      *  \sa SDL_HapticPause
      *  \sa SDL_HapticUnpause
      */
-    SDL_HAPTIC_PAUSE     = (1u<<15)
+    SDL_HAPTIC_PAUSE SDL_SWIFT_NAME(pause) = (1u<<15)
 };
 
 /**
@@ -311,21 +311,21 @@ typedef SDL_ENUM(Uint8, SDL_HapticDirectionType) {
      *
      *  \sa SDL_HapticDirection
      */
-    SDL_HAPTIC_POLAR     = 0,
+    SDL_HAPTIC_POLAR SDL_SWIFT_NAME(polar)         = 0,
     
     /**
      *  \brief Uses cartesian coordinates for the direction.
      *
      *  \sa SDL_HapticDirection
      */
-    SDL_HAPTIC_CARTESIAN = 1,
+    SDL_HAPTIC_CARTESIAN SDL_SWIFT_NAME(cartesian) = 1,
     
     /**
      *  \brief Uses spherical coordinates for the direction.
      *
      *  \sa SDL_HapticDirection
      */
-    SDL_HAPTIC_SPHERICAL = 2
+    SDL_HAPTIC_SPHERICAL SDL_SWIFT_NAME(spherical) = 2
 };
 
 /* @} *//* Direction encodings */

@@ -64,13 +64,13 @@ extern "C" {
  */
 typedef SDL_OPTIONS(Uint32, SDL_RendererFlags)
 {
-    SDL_RENDERER_SOFTWARE = 0x00000001,         /**< The renderer is a software fallback */
-    SDL_RENDERER_ACCELERATED = 0x00000002,      /**< The renderer uses hardware
-                                                     acceleration */
-    SDL_RENDERER_PRESENTVSYNC = 0x00000004,     /**< Present is synchronized
-                                                     with the refresh rate */
-    SDL_RENDERER_TARGETTEXTURE = 0x00000008     /**< The renderer supports
-                                                     rendering to texture */
+    SDL_RENDERER_SOFTWARE SDL_SWIFT_NAME(software) = 0x00000001,           /**< The renderer is a software fallback */
+    SDL_RENDERER_ACCELERATED SDL_SWIFT_NAME(accelerated) = 0x00000002,     /**< The renderer uses hardware
+                                                                            acceleration */
+    SDL_RENDERER_PRESENTVSYNC SDL_SWIFT_NAME(presentVSync) = 0x00000004,   /**< Present is synchronized
+                                                                            with the refresh rate */
+    SDL_RENDERER_TARGETTEXTURE SDL_SWIFT_NAME(targetTexture) = 0x00000008  /**< The renderer supports
+                                                                            rendering to texture */
 };
 
 /**
@@ -91,9 +91,9 @@ typedef struct SDL_RendererInfo
  */
 typedef SDL_ENUM(int, SDL_TextureAccess)
 {
-    SDL_TEXTUREACCESS_STATIC,    /**< Changes rarely, not lockable */
-    SDL_TEXTUREACCESS_STREAMING, /**< Changes frequently, lockable */
-    SDL_TEXTUREACCESS_TARGET     /**< Texture can be used as a render target */
+    SDL_TEXTUREACCESS_STATIC SDL_SWIFT_NAME(static),        /**< Changes rarely, not lockable */
+    SDL_TEXTUREACCESS_STREAMING SDL_SWIFT_NAME(streaming),  /**< Changes frequently, lockable */
+    SDL_TEXTUREACCESS_TARGET SDL_SWIFT_NAME(target)         /**< Texture can be used as a render target */
 };
 
 /**
@@ -101,9 +101,9 @@ typedef SDL_ENUM(int, SDL_TextureAccess)
  */
 typedef SDL_OPTIONS(Uint32, SDL_TextureModulate)
 {
-    SDL_TEXTUREMODULATE_NONE = 0x00000000,     /**< No modulation */
-    SDL_TEXTUREMODULATE_COLOR = 0x00000001,    /**< srcC = srcC * color */
-    SDL_TEXTUREMODULATE_ALPHA = 0x00000002     /**< srcA = srcA * alpha */
+    SDL_TEXTUREMODULATE_NONE SDL_SWIFT_NAME(none) = 0x00000000,     /**< No modulation */
+    SDL_TEXTUREMODULATE_COLOR SDL_SWIFT_NAME(color) = 0x00000001,   /**< srcC = srcC * color */
+    SDL_TEXTUREMODULATE_ALPHA SDL_SWIFT_NAME(alpha) = 0x00000002    /**< srcA = srcA * alpha */
 };
 
 /**
@@ -111,9 +111,9 @@ typedef SDL_OPTIONS(Uint32, SDL_TextureModulate)
  */
 typedef SDL_OPTIONS(Uint8, SDL_RendererFlip)
 {
-    SDL_FLIP_NONE = 0x00000000,     /**< Do not flip */
-    SDL_FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
-    SDL_FLIP_VERTICAL = 0x00000002     /**< flip vertically */
+    SDL_FLIP_NONE SDL_SWIFT_NAME(none) = 0x00000000,                /**< Do not flip */
+    SDL_FLIP_HORIZONTAL SDL_SWIFT_NAME(horizontal) = 0x00000001,    /**< flip horizontally */
+    SDL_FLIP_VERTICAL SDL_SWIFT_NAME(vertical) = 0x00000002         /**< flip vertically */
 };
 
 /**

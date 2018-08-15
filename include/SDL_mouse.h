@@ -45,18 +45,18 @@ typedef struct SDL_Cursor SDL_Cursor;   /**< Implementation dependent */
  */
 typedef SDL_ENUM(Sint8, SDL_SystemCursor)
 {
-    SDL_SYSTEM_CURSOR_ARROW,     /**< Arrow */
-    SDL_SYSTEM_CURSOR_IBEAM,     /**< I-beam */
-    SDL_SYSTEM_CURSOR_WAIT,      /**< Wait */
-    SDL_SYSTEM_CURSOR_CROSSHAIR, /**< Crosshair */
-    SDL_SYSTEM_CURSOR_WAITARROW, /**< Small wait cursor (or Wait if not available) */
-    SDL_SYSTEM_CURSOR_SIZENWSE,  /**< Double arrow pointing northwest and southeast */
-    SDL_SYSTEM_CURSOR_SIZENESW,  /**< Double arrow pointing northeast and southwest */
-    SDL_SYSTEM_CURSOR_SIZEWE,    /**< Double arrow pointing west and east */
-    SDL_SYSTEM_CURSOR_SIZENS,    /**< Double arrow pointing north and south */
-    SDL_SYSTEM_CURSOR_SIZEALL,   /**< Four pointed arrow pointing north, south, east, and west */
-    SDL_SYSTEM_CURSOR_NO,        /**< Slashed circle or crossbones */
-    SDL_SYSTEM_CURSOR_HAND,      /**< Hand */
+    SDL_SYSTEM_CURSOR_ARROW SDL_SWIFT_NAME(arrow),          /**< Arrow */
+    SDL_SYSTEM_CURSOR_IBEAM SDL_SWIFT_NAME(iBeam),          /**< I-beam */
+    SDL_SYSTEM_CURSOR_WAIT SDL_SWIFT_NAME(wait),            /**< Wait */
+    SDL_SYSTEM_CURSOR_CROSSHAIR SDL_SWIFT_NAME(crosshair),  /**< Crosshair */
+    SDL_SYSTEM_CURSOR_WAITARROW SDL_SWIFT_NAME(waitArriw),  /**< Small wait cursor (or Wait if not available) */
+    SDL_SYSTEM_CURSOR_SIZENWSE SDL_SWIFT_NAME(sizeNWSE),    /**< Double arrow pointing northwest and southeast */
+    SDL_SYSTEM_CURSOR_SIZENESW SDL_SWIFT_NAME(sizeNESW),    /**< Double arrow pointing northeast and southwest */
+    SDL_SYSTEM_CURSOR_SIZEWE SDL_SWIFT_NAME(sizeWE),        /**< Double arrow pointing west and east */
+    SDL_SYSTEM_CURSOR_SIZENS SDL_SWIFT_NAME(sizeNS),        /**< Double arrow pointing north and south */
+    SDL_SYSTEM_CURSOR_SIZEALL SDL_SWIFT_NAME(sizeAll),      /**< Four pointed arrow pointing north, south, east, and west */
+    SDL_SYSTEM_CURSOR_NO SDL_SWIFT_NAME(no),                /**< Slashed circle or crossbones */
+    SDL_SYSTEM_CURSOR_HAND SDL_SWIFT_NAME(hand),            /**< Hand */
     SDL_NUM_SYSTEM_CURSORS
 };
 
@@ -65,8 +65,8 @@ typedef SDL_ENUM(Sint8, SDL_SystemCursor)
  */
 typedef SDL_ENUM(Uint32, SDL_MouseWheelDirection)
 {
-    SDL_MOUSEWHEEL_NORMAL,    /**< The scroll direction is normal */
-    SDL_MOUSEWHEEL_FLIPPED    /**< The scroll direction is flipped / natural */
+    SDL_MOUSEWHEEL_NORMAL SDL_SWIFT_NAME(normal),   /**< The scroll direction is normal */
+    SDL_MOUSEWHEEL_FLIPPED SDL_SWIFT_NAME(flipped)  /**< The scroll direction is flipped / natural */
 };
 
 /* Function prototypes */

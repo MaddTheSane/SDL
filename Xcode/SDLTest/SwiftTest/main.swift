@@ -330,10 +330,10 @@ private func watchJoystick(_ joystick: OpaquePointer) -> Bool {
 var joystick: OpaquePointer? = nil
 
 /* Enable standard application logging */
-SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, .LOG_PRIORITY_INFO);
+SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, .info);
 
 /* Initialize SDL (Note: video is required to start event loop) */
-if (SDL_Init([.INIT_VIDEO, .INIT_JOYSTICK]) < 0) {
+if (SDL_Init([.video, .joystick]) < 0) {
 	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s\n", SDL_GetError());
 	exit(1);
 }
@@ -404,6 +404,6 @@ if CommandLine.arguments.count > 1 {
 }
 
 //SDL_Quit()
-SDL_QuitSubSystem([.INIT_VIDEO, .INIT_JOYSTICK])
+SDL_QuitSubSystem([.video, .joystick])
 
 exit(0)

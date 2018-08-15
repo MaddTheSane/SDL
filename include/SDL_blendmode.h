@@ -39,18 +39,18 @@ extern "C" {
  */
 typedef SDL_OPTIONS(Uint32, SDL_BlendMode)
 {
-    SDL_BLENDMODE_NONE = 0x00000000,     /**< no blending
-                                              dstRGBA = srcRGBA */
-    SDL_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
-                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
-                                              dstA = srcA + (dstA * (1-srcA)) */
-    SDL_BLENDMODE_ADD = 0x00000002,      /**< additive blending
-                                              dstRGB = (srcRGB * srcA) + dstRGB
-                                              dstA = dstA */
-    SDL_BLENDMODE_MOD = 0x00000004,      /**< color modulate
-                                              dstRGB = srcRGB * dstRGB
-                                              dstA = dstA */
-    SDL_BLENDMODE_INVALID = 0x7FFFFFFF
+    SDL_BLENDMODE_NONE SDL_SWIFT_NAME(none) = 0x00000000,   /**< no blending
+                                                             dstRGBA = srcRGBA */
+    SDL_BLENDMODE_BLEND SDL_SWIFT_NAME(blend) = 0x00000001, /**< alpha blending
+                                                             dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                                             dstA = srcA + (dstA * (1-srcA)) */
+    SDL_BLENDMODE_ADD SDL_SWIFT_NAME(add) = 0x00000002,     /**< additive blending
+                                                             dstRGB = (srcRGB * srcA) + dstRGB
+                                                             dstA = dstA */
+    SDL_BLENDMODE_MOD SDL_SWIFT_NAME(mod) = 0x00000004,     /**< color modulate
+                                                             dstRGB = srcRGB * dstRGB
+                                                             dstA = dstA */
+    SDL_BLENDMODE_INVALID SDL_SWIFT_NAME(invalid) = 0x7FFFFFFF
 
     /* Additional custom blend modes can be returned by SDL_ComposeCustomBlendMode() */
 
@@ -61,11 +61,11 @@ typedef SDL_OPTIONS(Uint32, SDL_BlendMode)
  */
 typedef SDL_ENUM(int, SDL_BlendOperation)
 {
-    SDL_BLENDOPERATION_ADD              = 0x1,  /**< dst + src: supported by all renderers */
-    SDL_BLENDOPERATION_SUBTRACT         = 0x2,  /**< dst - src : supported by D3D9, D3D11, OpenGL, OpenGLES */
-    SDL_BLENDOPERATION_REV_SUBTRACT     = 0x3,  /**< src - dst : supported by D3D9, D3D11, OpenGL, OpenGLES */
-    SDL_BLENDOPERATION_MINIMUM          = 0x4,  /**< min(dst, src) : supported by D3D11 */
-    SDL_BLENDOPERATION_MAXIMUM          = 0x5   /**< max(dst, src) : supported by D3D11 */
+    SDL_BLENDOPERATION_ADD SDL_SWIFT_NAME(add)                          = 0x1,  /**< dst + src: supported by all renderers */
+    SDL_BLENDOPERATION_SUBTRACT SDL_SWIFT_NAME(subtract)                = 0x2,  /**< dst - src : supported by D3D9, D3D11, OpenGL, OpenGLES */
+    SDL_BLENDOPERATION_REV_SUBTRACT SDL_SWIFT_NAME(reversedSubtract)    = 0x3,  /**< src - dst : supported by D3D9, D3D11, OpenGL, OpenGLES */
+    SDL_BLENDOPERATION_MINIMUM SDL_SWIFT_NAME(minimum)                  = 0x4,  /**< min(dst, src) : supported by D3D11 */
+    SDL_BLENDOPERATION_MAXIMUM SDL_SWIFT_NAME(maximum)                  = 0x5   /**< max(dst, src) : supported by D3D11 */
 
 };
 

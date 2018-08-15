@@ -151,6 +151,13 @@ char *alloca();
 #define SDL_ENUM(...) __SDL_ENUM_GET_MACRO(__VA_ARGS__, __SDL_NAMED_ENUM, __SDL_ANON_ENUM, )(__VA_ARGS__)
 /* @} *//* Fixed-sized enum declaration */
 
+#if __has_attribute(swift_name)
+# define SDL_SWIFT_NAME(_name) __attribute__((swift_name(#_name)))
+#else
+# define SDL_SWIFT_NAME(_name)
+#endif
+
+
 /**
  *  \name Cast operators
  *

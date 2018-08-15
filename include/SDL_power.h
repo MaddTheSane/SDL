@@ -41,11 +41,11 @@ extern "C" {
  */
 typedef SDL_ENUM(int, SDL_PowerState)
 {
-    SDL_POWERSTATE_UNKNOWN,      /**< cannot determine power status */
-    SDL_POWERSTATE_ON_BATTERY,   /**< Not plugged in, running on the battery */
-    SDL_POWERSTATE_NO_BATTERY,   /**< Plugged in, no battery available */
-    SDL_POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
-    SDL_POWERSTATE_CHARGED       /**< Plugged in, battery charged */
+    SDL_POWERSTATE_UNKNOWN SDL_SWIFT_NAME(unknown),         /**< cannot determine power status */
+    SDL_POWERSTATE_ON_BATTERY SDL_SWIFT_NAME(onBattery),    /**< Not plugged in, running on the battery */
+    SDL_POWERSTATE_NO_BATTERY SDL_SWIFT_NAME(noBattery),    /**< Plugged in, no battery available */
+    SDL_POWERSTATE_CHARGING SDL_SWIFT_NAME(charging),       /**< Plugged in, charging battery */
+    SDL_POWERSTATE_CHARGED SDL_SWIFT_NAME(charged)          /**< Plugged in, battery charged */
 };
 
 

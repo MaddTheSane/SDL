@@ -57,10 +57,10 @@ typedef unsigned int SDL_TLSID;
  *  \note On many systems you require special privileges to set high or time critical priority.
  */
 typedef SDL_ENUM(int, SDL_ThreadPriority) {
-    SDL_THREAD_PRIORITY_LOW,
-    SDL_THREAD_PRIORITY_NORMAL,
-    SDL_THREAD_PRIORITY_HIGH,
-    SDL_THREAD_PRIORITY_TIME_CRITICAL
+    SDL_THREAD_PRIORITY_LOW SDL_SWIFT_NAME(low),
+    SDL_THREAD_PRIORITY_NORMAL SDL_SWIFT_NAME(normal),
+    SDL_THREAD_PRIORITY_HIGH SDL_SWIFT_NAME(high),
+    SDL_THREAD_PRIORITY_TIME_CRITICAL SDL_SWIFT_NAME(timeCritical)
 };
 
 /**

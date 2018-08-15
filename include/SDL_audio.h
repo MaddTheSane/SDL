@@ -396,9 +396,9 @@ extern DECLSPEC SDL_AudioDeviceID SDLCALL SDL_OpenAudioDevice(const char
 /* @{ */
 typedef SDL_ENUM(int, SDL_AudioStatus)
 {
-    SDL_AUDIO_STOPPED = 0,
-    SDL_AUDIO_PLAYING,
-    SDL_AUDIO_PAUSED
+    SDL_AUDIO_STOPPED SDL_SWIFT_NAME(stopped) = 0,
+    SDL_AUDIO_PLAYING SDL_SWIFT_NAME(playing),
+    SDL_AUDIO_PAUSED SDL_SWIFT_NAME(paused)
 };
 extern DECLSPEC SDL_AudioStatus SDLCALL SDL_GetAudioStatus(void);
 

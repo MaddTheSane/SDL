@@ -1030,9 +1030,9 @@ extern "C" {
  */
 typedef SDL_ENUM(int, SDL_HintPriority)
 {
-    SDL_HINT_DEFAULT,
-    SDL_HINT_NORMAL,
-    SDL_HINT_OVERRIDE
+    SDL_HINT_DEFAULT SDL_SWIFT_NAME(default),
+    SDL_HINT_NORMAL SDL_SWIFT_NAME(normal),
+    SDL_HINT_OVERRIDE SDL_SWIFT_NAME(override)
 };
 
 

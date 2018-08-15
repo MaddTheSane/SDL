@@ -104,10 +104,10 @@ typedef int (SDLCALL *SDL_blit) (struct SDL_Surface * src, SDL_Rect * srcrect,
  */
 typedef SDL_ENUM(Sint8, SDL_YUV_CONVERSION_MODE)
 {
-    SDL_YUV_CONVERSION_JPEG,        /**< Full range JPEG */
-    SDL_YUV_CONVERSION_BT601,       /**< BT.601 (the default) */
-    SDL_YUV_CONVERSION_BT709,       /**< BT.709 */
-    SDL_YUV_CONVERSION_AUTOMATIC    /**< BT.601 for SD content, BT.709 for HD content */
+    SDL_YUV_CONVERSION_JPEG SDL_SWIFT_NAME(jpeg),           /**< Full range JPEG */
+    SDL_YUV_CONVERSION_BT601 SDL_SWIFT_NAME(bt601),         /**< BT.601 (the default) */
+    SDL_YUV_CONVERSION_BT709 SDL_SWIFT_NAME(bt709),         /**< BT.709 */
+    SDL_YUV_CONVERSION_AUTOMATIC SDL_SWIFT_NAME(automatic)  /**< BT.601 for SD content, BT.709 for HD content */
 };
 
 /**
