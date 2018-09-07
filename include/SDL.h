@@ -51,6 +51,7 @@
 #include "SDL_power.h"
 #include "SDL_render.h"
 #include "SDL_rwops.h"
+#include "SDL_sensor.h"
 #include "SDL_shape.h"
 #include "SDL_system.h"
 #include "SDL_thread.h"
@@ -82,10 +83,11 @@ typedef SDL_OPTIONS(Uint32, SDL_InitFlags)
     SDL_INIT_HAPTIC SDL_SWIFT_NAME(haptic) = 0x00001000u,
     SDL_INIT_GAMECONTROLLER SDL_SWIFT_NAME(gameController) = 0x00002000u,  /**< SDL_INIT_GAMECONTROLLER implies SDL_INIT_JOYSTICK */
     SDL_INIT_EVENTS SDL_SWIFT_NAME(events) = 0x00004000u,
+    SDL_INIT_SENSOR SDL_SWIFT_NAME(sensor) = 0x00008000u,
     SDL_INIT_NOPARACHUTE SDL_SWIFT_NAME(noParachute) = 0x00100000u, /**< compatibility; this flag is ignored. */
     SDL_INIT_EVERYTHING SDL_SWIFT_NAME(everything) = (
             SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS |
-            SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER
+            SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER | SDL_INIT_SENSOR
         )
 };
 /* @} */

@@ -1308,7 +1308,7 @@
 		00794E5F09D20839003FC8A1 /* picture.xbm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = picture.xbm; sourceTree = "<group>"; };
 		00794E6109D20839003FC8A1 /* sample.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = sample.bmp; sourceTree = "<group>"; };
 		00794E6209D20839003FC8A1 /* sample.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sample.wav; sourceTree = "<group>"; };
-		00794E6309D20839003FC8A1 /* utf8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = utf8.txt; sourceTree = "<group>"; };
+		00794E6309D20839003FC8A1 /* utf8.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = utf8.txt; sourceTree = "<group>"; };
 		083E4872006D84C97F000001 /* loopwave.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = loopwave.c; sourceTree = "<group>"; };
 		083E4878006D85357F000001 /* testerror.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = testerror.c; sourceTree = "<group>"; };
 		083E487E006D86A17F000001 /* testsem.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = testsem.c; sourceTree = "<group>"; };
