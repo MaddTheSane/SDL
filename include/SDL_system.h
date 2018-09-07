@@ -263,6 +263,11 @@ extern DECLSPEC SDL_WinRT_DeviceFamily SDLCALL SDL_WinRTGetDeviceFamily();
 
 #endif /* __WINRT__ */
 
+/**
+ \brief Return true if the current device is a tablet.
+ */
+extern DECLSPEC SDL_bool SDLCALL SDL_IsTablet(void);
+
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
