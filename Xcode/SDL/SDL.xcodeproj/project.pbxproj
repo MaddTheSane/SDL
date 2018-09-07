@@ -1993,9 +1993,8 @@
 				F30D9C83212BC94F0047DF2E /* SDL_sensor.c */,
 				F30D9C82212BC94F0047DF2E /* SDL_syssensor.h */,
 			);
-			name = sensor;
-			path = ../../src/sensor;
-			sourceTree = SOURCE_ROOT;
+			path = sensor;
+			sourceTree = "<group>";
 		};
 		F59C70FC00D5CB5801000001 /* pkg-support */ = {
 			isa = PBXGroup;
