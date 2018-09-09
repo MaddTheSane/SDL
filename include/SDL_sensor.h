@@ -71,7 +71,7 @@ typedef SDL_ENUM(Sint32, SDL_SensorType)
     SDL_SENSOR_INVALID = -1,    /**< Returned for an invalid sensor */
     SDL_SENSOR_UNKNOWN,         /**< Unknown sensor type */
     SDL_SENSOR_ACCEL,           /**< Accelerometer */
-    SDL_SENSOR_GYRO,            /**< Gyroscope */
+    SDL_SENSOR_GYRO             /**< Gyroscope */
 };
 
 /**
