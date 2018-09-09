@@ -7,6 +7,9 @@
 
 import Foundation
 import SDL2
+import SDL2.SDL_log
+import SDL2.SDL_gamecontroller
+import SDL2.SDL_surface
 
 var SCREEN_WIDTH: Int32 { return 512 }
 var SCREEN_HEIGHT: Int32 { return 320 }
@@ -138,11 +141,11 @@ func loop(_ gamecontroller: SDL_GameControllerPtr) {
 	for i in 0 ..< SDL_GameControllerAxis.CONTROLLER_AXIS_MAX.rawValue {
 		let deadzone: Sint16 = 8000;  /* !!! FIXME: real deadzone */
 		let value = SDL_GameControllerGetAxis(gamecontroller, SDL_GameControllerAxis(rawValue: i)!);
-		if (value < -deadzone) {
+		if value < -deadzone {
 			var dst = SDL_Rect(x: AxisPositions[Int(i)].x, y: AxisPositions[Int(i)].y, w: 50, h: 50)
 			let angle = AxisPositions[Int(i)].angle;
 			SDL_RenderCopyEx(screen, axis, nil, &dst, angle, nil, []);
-		} else if (value > deadzone) {
+		} else if value > deadzone {
 			var dst = SDL_Rect(x: AxisPositions[Int(i)].x, y: AxisPositions[Int(i)].y, w: 50, h: 50);
 			let angle = AxisPositions[Int(i)].angle + 180.0;
 			SDL_RenderCopyEx(screen, axis, nil, &dst, angle, nil, []);
@@ -152,14 +155,13 @@ func loop(_ gamecontroller: SDL_GameControllerPtr) {
 	SDL_RenderPresent(screen);
 	
 	if (!SDL_GameControllerGetAttached(gamecontroller).boolValue) {
-		done = true;
-		retval = .TRUE;  /* keep going, wait for reattach. */
+		done = true
+		retval = true  /* keep going, wait for reattach. */
 	}
-
 }
 
 private func watchGameController(_ gamecontroller: SDL_GameControllerPtr) -> Bool {
-	let name = SDL_GameControllerName(gamecontroller);
+	let name = SDL_GameControllerName(gamecontroller)
 	var basetitle = "Game Controller Test: "
 	
 	if let name = name {
@@ -268,8 +270,8 @@ private func theMainFunc() -> Int32 {
 	SDL_Log("There are %d game controller(s) attached (%d joystick(s))\n", nController, SDL_NumJoysticks())
 
 	if CommandLine.arguments.count > 1 {
-		var reportederror = false;
-		var keepGoing = true;
+		var reportederror = false
+		var keepGoing = true
 		var event = SDL_Event()
 		let device = Int32(CommandLine.arguments[1]) ?? 0
 		if device >= SDL_NumJoysticks() {
@@ -281,7 +283,7 @@ private func theMainFunc() -> Int32 {
 			guid.withUnsafeMutableBufferPointer { (uuid) -> Void in
 				SDL_Log("Attempting to open device %i, guid %s\n", device, uuid.baseAddress!);
 			}
-			gamecontroller = SDL_GameControllerOpen(device);
+			gamecontroller = SDL_GameControllerOpen(device)
 			
 			if let gamecontroller = gamecontroller {
 				assert(SDL_GameControllerFromInstanceID(SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(gamecontroller))) == gamecontroller)
@@ -293,7 +295,7 @@ private func theMainFunc() -> Int32 {
 					keepGoing = watchGameController(gamecontroller)
 					SDL_GameControllerClose(gamecontroller)
 				} else {
-					if (!reportederror) {
+					if !reportederror {
 						SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't open gamecontroller %d: %s\n", device, SDL_GetError())
 						retcode = 1
 						keepGoing = false
