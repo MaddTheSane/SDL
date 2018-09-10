@@ -47,7 +47,7 @@ framework module SDL2 {
         export *
     }
     
-    module SDL_types {
+    explicit module SDL_types {
         exclude header "SDL_types.h"
         export SDL2.SDL_stdinc
     }
