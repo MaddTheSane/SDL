@@ -47,6 +47,13 @@ framework module SDL2 {
         export *
     }
     
+    explicit module SDL_main {
+        // the declaration of SDL_main() makes Swift think it's implemented, causing an error.
+        requires !swift
+        header "SDL_main.h"
+        export *
+    }
+    
     explicit module SDL_types {
         exclude header "SDL_types.h"
         export SDL2.SDL_stdinc
