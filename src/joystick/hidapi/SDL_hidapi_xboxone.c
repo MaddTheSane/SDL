@@ -36,46 +36,6 @@
 
 #define USB_PACKET_LENGTH   64
 
-typedef struct
-{
-    Uint16 vendor_id;
-    Uint16 product_id;
-    const char *name;
-} SDL_DriverXboxOne_DeviceName;
-
-static const SDL_DriverXboxOne_DeviceName xboxone_devicenames[] = {
-    { 0x045e, 0x02d1, "Microsoft X-Box One pad" },
-    { 0x045e, 0x02dd, "Microsoft X-Box One pad (Firmware 2015)" },
-    { 0x045e, 0x02e3, "Microsoft X-Box One Elite pad" },
-    { 0x045e, 0x02ea, "Microsoft X-Box One S pad" },
-    { 0x045e, 0x02ff, "Microsoft X-Box One pad" },
-    { 0x0738, 0x4a01, "Mad Catz FightStick TE 2" },
-    { 0x0e6f, 0x0139, "Afterglow Prismatic Wired Controller" },
-    { 0x0e6f, 0x013a, "PDP Xbox One Controller" },
-    { 0x0e6f, 0x0146, "Rock Candy Wired Controller for Xbox One" },
-    { 0x0e6f, 0x0147, "PDP Marvel Xbox One Controller" },
-    { 0x0e6f, 0x015c, "PDP Xbox One Arcade Stick" },
-    { 0x0e6f, 0x0161, "PDP Xbox One Controller" },
-    { 0x0e6f, 0x0162, "PDP Xbox One Controller" },
-    { 0x0e6f, 0x0163, "PDP Xbox One Controller" },
-    { 0x0e6f, 0x0164, "PDP Battlefield One" },
-    { 0x0e6f, 0x0165, "PDP Titanfall 2" },
-    { 0x0e6f, 0x0246, "Rock Candy Gamepad for Xbox One 2015" },
-    { 0x0e6f, 0x02ab, "PDP Controller for Xbox One" },
-    { 0x0e6f, 0x02a4, "PDP Wired Controller for Xbox One - Stealth Series" },
-    { 0x0e6f, 0x0346, "Rock Candy Gamepad for Xbox One 2016" },
-    { 0x0f0d, 0x0063, "Hori Real Arcade Pro Hayabusa (USA) Xbox One" },
-    { 0x0f0d, 0x0067, "HORIPAD ONE" },
-    { 0x0f0d, 0x0078, "Hori Real Arcade Pro V Kai Xbox One" },
-    { 0x1532, 0x0a00, "Razer Atrox Arcade Stick" },
-    { 0x1532, 0x0a03, "Razer Wildcat" },
-    { 0x24c6, 0x541a, "PowerA Xbox One Mini Wired Controller" },
-    { 0x24c6, 0x542a, "Xbox ONE spectra" },
-    { 0x24c6, 0x543a, "PowerA Xbox One wired controller" },
-    { 0x24c6, 0x551a, "PowerA FUSION Pro Controller" },
-    { 0x24c6, 0x561a, "PowerA FUSION Controller" },
-};
-
 /*
  * This packet is required for all Xbox One pads with 2015
  * or later firmware installed (or present from the factory).
@@ -171,7 +131,7 @@ typedef struct {
 
 
 static SDL_bool
-HIDAPI_DriverXboxOne_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, int interface_number, Uint16 usage_page, Uint16 usage)
+HIDAPI_DriverXboxOne_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
     return SDL_IsJoystickXboxOne(vendor_id, product_id);
 }
@@ -179,15 +139,7 @@ HIDAPI_DriverXboxOne_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, int 
 static const char *
 HIDAPI_DriverXboxOne_GetDeviceName(Uint16 vendor_id, Uint16 product_id)
 {
-    int i;
-
-    for (i = 0; i < SDL_arraysize(xboxone_devicenames); ++i) {
-        const SDL_DriverXboxOne_DeviceName *entry = &xboxone_devicenames[i];
-        if (vendor_id == entry->vendor_id && product_id == entry->product_id) {
-            return entry->name;
-        }
-    }
-    return NULL;
+    return HIDAPI_XboxControllerName(vendor_id, product_id);
 }
 
 static SDL_bool
@@ -280,8 +232,14 @@ HIDAPI_DriverXboxOne_HandleStatePacket(SDL_Joystick *joystick, hid_device *dev, 
     }
 
     axis = ((int)*(Sint16*)(&data[6]) * 64) - 32768;
+    if (axis == 32704) {
+        axis = 32767;
+    }
     SDL_PrivateJoystickAxis(joystick, SDL_CONTROLLER_AXIS_TRIGGERLEFT, axis);
     axis = ((int)*(Sint16*)(&data[8]) * 64) - 32768;
+    if (axis == 32704) {
+        axis = 32767;
+    }
     SDL_PrivateJoystickAxis(joystick, SDL_CONTROLLER_AXIS_TRIGGERRIGHT, axis);
     axis = *(Sint16*)(&data[10]);
     SDL_PrivateJoystickAxis(joystick, SDL_CONTROLLER_AXIS_LEFTX, axis);
@@ -308,7 +266,7 @@ HIDAPI_DriverXboxOne_HandleModePacket(SDL_Joystick *joystick, hid_device *dev, S
     SDL_PrivateJoystickButton(joystick, SDL_CONTROLLER_BUTTON_GUIDE, (data[4] & 0x01) ? SDL_PRESSED : SDL_RELEASED);
 }
 
-static void
+static SDL_bool
 HIDAPI_DriverXboxOne_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverXboxOne_Context *ctx = (SDL_DriverXboxOne_Context *)context;
@@ -337,6 +295,8 @@ HIDAPI_DriverXboxOne_Update(SDL_Joystick *joystick, hid_device *dev, void *conte
             HIDAPI_DriverXboxOne_Rumble(joystick, dev, context, 0, 0, 0);
         }
     }
+
+    return (size >= 0);
 }
 
 static void
@@ -347,7 +307,7 @@ HIDAPI_DriverXboxOne_Quit(SDL_Joystick *joystick, hid_device *dev, void *context
 
 SDL_HIDAPI_DeviceDriver SDL_HIDAPI_DriverXboxOne =
 {
-    SDL_HINT_JOYSTICK_HIDAPI_XBOXONE,
+    SDL_HINT_JOYSTICK_HIDAPI_XBOX,
     SDL_TRUE,
     HIDAPI_DriverXboxOne_IsSupportedDevice,
     HIDAPI_DriverXboxOne_GetDeviceName,

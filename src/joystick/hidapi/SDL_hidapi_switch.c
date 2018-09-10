@@ -210,7 +210,7 @@ typedef struct {
 
 
 static SDL_bool
-HIDAPI_DriverSwitch_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, int interface_number, Uint16 usage_page, Uint16 usage)
+HIDAPI_DriverSwitch_IsSupportedDevice(Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number)
 {
     return SDL_IsJoystickNintendoSwitchPro(vendor_id, product_id);
 }
@@ -846,12 +846,13 @@ static void HandleFullControllerState(SDL_Joystick *joystick, SDL_DriverSwitch_C
     ctx->m_lastFullState = *packet;
 }
 
-static void
+static SDL_bool
 HIDAPI_DriverSwitch_Update(SDL_Joystick *joystick, hid_device *dev, void *context)
 {
     SDL_DriverSwitch_Context *ctx = (SDL_DriverSwitch_Context *)context;
+    int size;
 
-    while (ReadInput(ctx) > 0) {
+    while ((size = ReadInput(ctx)) > 0) {
         switch (ctx->m_rgucReadBuffer[0]) {
         case k_eSwitchInputReportIDs_SimpleControllerState:
             HandleSimpleControllerState(joystick, ctx, (SwitchSimpleStatePacket_t *)&ctx->m_rgucReadBuffer[1]);
@@ -870,6 +871,8 @@ HIDAPI_DriverSwitch_Update(SDL_Joystick *joystick, hid_device *dev, void *contex
             HIDAPI_DriverSwitch_Rumble(joystick, dev, context, 0, 0, 0);
         }
     }
+
+    return (size >= 0);
 }
 
 static void
