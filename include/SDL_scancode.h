@@ -40,7 +40,7 @@
  *  The values in this enumeration are based on the USB usage page standard:
  *  http://www.usb.org/developers/hidpage/Hut1_12v2.pdf
  */
-typedef enum
+typedef SDL_ENUM(int, SDL_Scancode)
 {
     SDL_SCANCODE_UNKNOWN = 0,
 
@@ -406,7 +406,7 @@ typedef enum
 
     SDL_NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
                                  for array bounds */
-} SDL_Scancode;
+};
 
 #endif /* SDL_scancode_h_ */
 

@@ -735,7 +735,7 @@ SDL_ENUM(int) {
  *   - If \c state is set to ::SDL_QUERY, SDL_EventState() will return the
  *     current processing state of the specified event.
  */
-extern DECLSPEC Uint8 SDLCALL SDL_EventState(Uint32 type, int state);
+extern DECLSPEC Uint8 SDLCALL SDL_EventState(SDL_EventType type, int state);
 /* @} */
 #define SDL_GetEventState(type) SDL_EventState(type, SDL_QUERY)
 

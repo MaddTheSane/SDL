@@ -129,12 +129,12 @@ typedef SDL_ENUM(int, SDL_YUV_CONVERSION_MODE)
  *  \param Amask The alpha mask of the surface to create.
  */
 extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurface
-    (Uint32 flags, int width, int height, int depth,
+    (SDL_SurfaceFlag flags, int width, int height, int depth,
      Uint32 Rmask, Uint32 Gmask, Uint32 Bmask, Uint32 Amask);
 
 /* !!! FIXME for 2.1: why does this ask for depth? Format provides that. */
 extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurfaceWithFormat
-    (Uint32 flags, int width, int height, int depth, Uint32 format);
+    (SDL_SurfaceFlag flags, int width, int height, int depth, Uint32 format);
 
 extern DECLSPEC SDL_Surface *SDLCALL SDL_CreateRGBSurfaceFrom(void *pixels,
                                                               int width,
@@ -388,9 +388,9 @@ extern DECLSPEC SDL_Surface *SDLCALL SDL_DuplicateSurface(SDL_Surface * surface)
  *  surface.
  */
 extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurface
-    (SDL_Surface * src, const SDL_PixelFormat * fmt, Uint32 flags);
+    (SDL_Surface * src, const SDL_PixelFormat * fmt, SDL_SurfaceFlag flags);
 extern DECLSPEC SDL_Surface *SDLCALL SDL_ConvertSurfaceFormat
-    (SDL_Surface * src, Uint32 pixel_format, Uint32 flags);
+    (SDL_Surface * src, Uint32 pixel_format, SDL_SurfaceFlag flags);
 
 /**
  * \brief Copy a block of pixels of one format to another format
