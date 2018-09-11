@@ -39,12 +39,14 @@ extern "C" {
 #endif
 
 /* RWops Types */
-#define SDL_RWOPS_UNKNOWN   0U  /**< Unknown stream type */
-#define SDL_RWOPS_WINFILE   1U  /**< Win32 file */
-#define SDL_RWOPS_STDFILE   2U  /**< Stdio file */
-#define SDL_RWOPS_JNIFILE   3U  /**< Android asset */
-#define SDL_RWOPS_MEMORY    4U  /**< Memory stream */
-#define SDL_RWOPS_MEMORY_RO 5U  /**< Read-Only memory stream */
+typedef SDL_ENUM(Uint32, SDL_RWopsType) {
+    SDL_RWOPS_UNKNOWN    = 0U,  /**< Unknown stream type */
+    SDL_RWOPS_WINFILE    = 1U,  /**< Win32 file */
+    SDL_RWOPS_STDFILE    = 2U,  /**< Stdio file */
+    SDL_RWOPS_JNIFILE    = 3U,  /**< Android asset */
+    SDL_RWOPS_MEMORY     = 4U,  /**< Memory stream */
+    SDL_RWOPS_MEMORY_RO  = 5U   /**< Read-Only memory stream */
+};
 
 /**
  * This is the read/write operation structure -- very basic.
@@ -90,7 +92,7 @@ typedef struct SDL_RWops
      */
     int (SDLCALL * close) (struct SDL_RWops * context);
 
-    Uint32 type;
+    SDL_RWopsType type;
     union
     {
 #if defined(__ANDROID__)

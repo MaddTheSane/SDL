@@ -182,10 +182,10 @@ typedef struct SDL_CommonEvent
  */
 typedef struct SDL_DisplayEvent
 {
-    Uint32 type;        /**< ::SDL_DISPLAYEVENT */
+    SDL_EventType type; /**< ::SDL_DISPLAYEVENT */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     Uint32 display;     /**< The associated display index */
-    Uint8 event;        /**< ::SDL_DisplayEventID */
+    SDL_DisplayEventID event; /**< ::SDL_DisplayEventID */
     Uint8 padding1;
     Uint8 padding2;
     Uint8 padding3;
@@ -500,7 +500,7 @@ typedef struct SDL_DropEvent
  */
 typedef struct SDL_SensorEvent
 {
-    Uint32 type;        /**< ::SDL_SENSORUPDATE */
+    SDL_EventType type; /**< ::SDL_SENSORUPDATE */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     Sint32 which;       /**< The instance ID of the sensor */
     float data[6];      /**< Up to 6 values from the sensor - additional values can be queried using SDL_SensorGetData() */
