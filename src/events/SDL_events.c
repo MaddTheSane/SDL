@@ -874,7 +874,7 @@ SDL_FilterEvents(SDL_EventFilter filter, void *userdata)
 }
 
 Uint8
-SDL_EventState(Uint32 type, int state)
+SDL_EventState(SDL_EventType type, int state)
 {
     const SDL_bool isdnd = ((state == SDL_DISABLE) || (state == SDL_ENABLE)) &&
                            ((type == SDL_DROPFILE) || (type == SDL_DROPTEXT));
