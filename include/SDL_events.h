@@ -55,7 +55,7 @@ typedef SDL_ENUM(Uint8, SDL_EventStateGeneric)
 /**
  * \brief The types of events that can be delivered.
  */
-typedef SDL_ENUM(Uint16, SDL_EventType)
+typedef SDL_ENUM(Uint32, SDL_EventType)
 {
     SDL_FIRSTEVENT     = 0,     /**< Unused (do not remove) */
 
@@ -500,7 +500,7 @@ typedef struct SDL_DropEvent
  */
 typedef struct SDL_SensorEvent
 {
-    Uint32 type;        /**< ::SDL_SENSORUPDATE */
+    SDL_EventType type; /**< ::SDL_SENSORUPDATE */
     Uint32 timestamp;   /**< In milliseconds, populated using SDL_GetTicks() */
     Sint32 which;       /**< The instance ID of the sensor */
     float data[6];      /**< Up to 6 values from the sensor - additional values can be queried using SDL_SensorGetData() */
