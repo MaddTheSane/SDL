@@ -853,7 +853,7 @@ extern DECLSPEC int SDLCALL SDL_RenderCopyEx(SDL_Renderer * renderer,
  */
 extern DECLSPEC int SDLCALL SDL_RenderReadPixels(SDL_Renderer * renderer,
                                                  const SDL_Rect * rect,
-                                                 Uint32 format,
+                                                 SDL_PixelFormatFormat format,
                                                  void *pixels, int pitch);
 
 /**
