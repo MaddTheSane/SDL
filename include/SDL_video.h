@@ -172,20 +172,20 @@ typedef SDL_ENUM(Uint8, SDL_WindowEventID)
 /**
  *  \brief Event subtype for display events
  */
-typedef enum
+typedef SDL_ENUM(Uint8, SDL_DisplayEventID)
 {
     SDL_DISPLAYEVENT_NONE,          /**< Never used */
     SDL_DISPLAYEVENT_ORIENTATION    /**< Display orientation has changed to data1 */
-} SDL_DisplayEventID;
+};
 
-typedef enum
+typedef SDL_ENUM(int, SDL_DisplayOrientation)
 {
     SDL_ORIENTATION_UNKNOWN,            /**< The display orientation can't be determined */
     SDL_ORIENTATION_LANDSCAPE,          /**< The display is in landscape mode, with the right side up, relative to portrait mode */
     SDL_ORIENTATION_LANDSCAPE_FLIPPED,  /**< The display is in landscape mode, with the left side up, relative to portrait mode */
     SDL_ORIENTATION_PORTRAIT,           /**< The display is in portrait mode */
     SDL_ORIENTATION_PORTRAIT_FLIPPED    /**< The display is in portrait mode, upside down */
-} SDL_DisplayOrientation;
+};
 
 /**
  *  \brief An opaque handle to an OpenGL context.
